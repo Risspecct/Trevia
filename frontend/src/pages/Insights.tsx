@@ -121,7 +121,7 @@ const Insights = () => {
                 clickEffect
                 spotlightRadius={300}
                 particleCount={8}
-                glowColor="212, 175, 55"
+                glowColor="70, 124, 87"
                 className="insight-item rounded-xl"
               >
                 <div className="glass-card gold-border p-4 rounded-xl hover-lift">

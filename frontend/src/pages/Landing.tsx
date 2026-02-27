@@ -42,9 +42,9 @@ const Cloud = ({ style, className }: { style?: React.CSSProperties; className?: 
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <ellipse cx="70" cy="55" rx="70" ry="25" fill="rgba(212,175,55,0.06)" />
-    <ellipse cx="100" cy="40" rx="50" ry="30" fill="rgba(212,175,55,0.04)" />
-    <ellipse cx="140" cy="50" rx="55" ry="22" fill="rgba(212,175,55,0.05)" />
+    <ellipse cx="70" cy="55" rx="70" ry="25" fill="rgba(86,138,102,0.06)" />
+    <ellipse cx="100" cy="40" rx="50" ry="30" fill="rgba(86,138,102,0.04)" />
+    <ellipse cx="140" cy="50" rx="55" ry="22" fill="rgba(86,138,102,0.05)" />
   </svg>
 );
 
@@ -64,7 +64,7 @@ const StarField = ({ count = 60 }: { count?: number }) => {
       {stars.map((s) => (
         <div
           key={s.id}
-          className="absolute rounded-full bg-[#d4af37] animate-pulse"
+          className="absolute rounded-full bg-[#568a66] animate-pulse"
           style={{
             left: s.left,
             top: s.top,
@@ -150,7 +150,7 @@ const FlightRoute = () => {
           ref={pathRef}
           d="M-50,500 Q300,200 500,350 T900,250 T1500,300"
           fill="none"
-          stroke="rgba(212,175,55,0.4)"
+          stroke="rgba(86,138,102,0.4)"
           strokeWidth="2"
           strokeLinecap="round"
           filter="url(#glow)"
@@ -167,7 +167,7 @@ const FlightRoute = () => {
         </defs>
       </svg>
       <div ref={planeRef} className="absolute top-1/2" style={{ zIndex: 10 }}>
-        <Plane className="w-6 h-6 text-[#d4af37] drop-shadow-[0_0_12px_rgba(212,175,55,0.8)]" />
+        <Plane className="w-6 h-6 text-[#568a66] drop-shadow-[0_0_12px_rgba(86,138,102,0.8)]" />
       </div>
     </div>
   );
@@ -179,11 +179,11 @@ const CitySkyline = () => (
     <svg viewBox="0 0 1440 200" className="w-full h-32 md:h-48" preserveAspectRatio="none">
       <path
         d="M0,200 L0,160 L40,160 L40,130 L60,130 L60,140 L80,140 L80,110 L100,110 L100,120 L130,120 L130,90 L145,90 L145,100 L160,100 L160,80 L175,80 L175,95 L200,95 L200,130 L220,130 L220,100 L240,100 L240,70 L255,70 L255,60 L270,60 L270,80 L290,80 L290,110 L320,110 L320,90 L340,90 L340,50 L355,50 L355,70 L380,70 L380,100 L400,100 L400,120 L440,120 L440,90 L460,90 L460,40 L480,40 L480,70 L500,70 L500,110 L540,110 L540,130 L580,130 L580,100 L600,100 L600,60 L615,60 L615,45 L630,45 L630,70 L660,70 L660,100 L700,100 L700,120 L740,120 L740,80 L760,80 L760,50 L775,50 L775,65 L800,65 L800,95 L840,95 L840,110 L880,110 L880,70 L900,70 L900,40 L920,40 L920,60 L950,60 L950,80 L980,80 L980,130 L1020,130 L1020,100 L1040,100 L1040,55 L1060,55 L1060,75 L1090,75 L1090,100 L1120,100 L1120,120 L1160,120 L1160,90 L1180,90 L1180,60 L1200,60 L1200,80 L1240,80 L1240,110 L1280,110 L1280,130 L1320,130 L1320,100 L1360,100 L1360,120 L1400,120 L1400,140 L1440,140 L1440,200 Z"
-        fill="rgba(18,14,10,0.3)"
+        fill="rgba(10,10,10,0.3)"
       />
       <path
         d="M0,200 L0,170 L60,170 L60,150 L100,150 L100,160 L160,160 L160,140 L200,140 L200,155 L260,155 L260,135 L300,135 L300,150 L360,150 L360,145 L420,145 L420,160 L480,160 L480,140 L540,140 L540,155 L600,155 L600,145 L660,145 L660,160 L720,160 L720,150 L780,150 L780,140 L840,140 L840,155 L900,155 L900,160 L960,160 L960,150 L1020,150 L1020,145 L1080,145 L1080,155 L1140,155 L1140,165 L1200,165 L1200,155 L1260,155 L1260,160 L1320,160 L1320,170 L1380,170 L1380,165 L1440,165 L1440,200 Z"
-        fill="rgba(18,14,10,0.15)"
+        fill="rgba(10,10,10,0.15)"
       />
     </svg>
   </div>
@@ -206,7 +206,7 @@ const FloatingBubbles = () => {
         width: ${size}px;
         height: ${size}px;
         border-radius: 50%;
-        background: rgba(212, 175, 55, ${0.03 + Math.random() * 0.06});
+        background: rgba(86, 138, 102, ${0.03 + Math.random() * 0.06});
         filter: blur(${20 + Math.random() * 30}px);
         pointer-events: none;
         left: ${Math.random() * 100}%;
@@ -292,7 +292,7 @@ const Landing = () => {
   }, []);
 
   return (
-    <div className="min-h-screen relative overflow-hidden" style={{ background: "#120e0a" }}>
+    <div className="min-h-screen relative overflow-hidden" style={{ background: "#0a0a0a" }}>
       {/* Star field */}
       <StarField count={80} />
 
@@ -314,16 +314,16 @@ const Landing = () => {
       </div>
 
       {/* Ambient glow orbs */}
-      <div className="absolute top-1/4 left-1/3 w-[500px] h-[500px] rounded-full blur-[160px] pointer-events-none" style={{ background: "rgba(212,175,55,0.06)" }} />
-      <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] rounded-full blur-[140px] pointer-events-none" style={{ background: "rgba(212,175,55,0.03)" }} />
+      <div className="absolute top-1/4 left-1/3 w-[500px] h-[500px] rounded-full blur-[160px] pointer-events-none" style={{ background: "rgba(86,138,102,0.06)" }} />
+      <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] rounded-full blur-[140px] pointer-events-none" style={{ background: "rgba(86,138,102,0.03)" }} />
 
       {/* City Skyline */}
       <CitySkyline />
 
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-end px-8 py-5" style={{ background: "rgba(18,14,10,0.85)" }}>
+      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-end px-8 py-5" style={{ background: "rgba(10,10,10,0.85)" }}>
         <div className="flex items-center gap-6">
-          <span className="text-xs font-medium tracking-widest uppercase" style={{ color: "rgba(212,175,55,0.6)" }}>
+          <span className="text-xs font-medium tracking-widest uppercase" style={{ color: "rgba(86,138,102,0.6)" }}>
             Tourism Intelligence
           </span>
         </div>
@@ -331,23 +331,23 @@ const Landing = () => {
 
       {/* ─── Hero Section ─── */}
       <section ref={heroRef} className="relative flex flex-col items-center justify-center min-h-screen px-6 text-center pt-20 z-10">
-        <h1 className="hero-el text-6xl md:text-8xl lg:text-9xl font-display font-bold leading-[0.95] max-w-5xl" style={{ color: "#d4af37" }}>
+        <h1 className="hero-el text-6xl md:text-8xl lg:text-9xl font-display font-bold leading-[0.95] max-w-5xl" style={{ color: "#568a66" }}>
           Welcome to
           <br />
           <span
             className="inline-block mt-2"
             style={{
-              background: "linear-gradient(135deg, #d4af37, #f1e5ac, #b8860b)",
+              background: "linear-gradient(135deg, #568a66, #7c9082, #467c57)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
-              filter: "drop-shadow(0 0 40px rgba(212,175,55,0.4))",
+              filter: "drop-shadow(0 0 40px rgba(86,138,102,0.4))",
             }}
           >
             Trevia
           </span>
         </h1>
 
-        <p className="hero-el mt-8 text-lg md:text-xl max-w-2xl leading-relaxed" style={{ color: "rgba(212,175,55,0.65)" }}>
+        <p className="hero-el mt-8 text-lg md:text-xl max-w-2xl leading-relaxed" style={{ color: "rgba(86,138,102,0.65)" }}>
           Data-driven insights for safer, smarter, and more confident travel decisions.
           Powered by real-time intelligence and geospatial analytics.
         </p>
@@ -359,12 +359,12 @@ const Landing = () => {
           className="hero-el mt-12 group relative flex items-center gap-3 px-10 py-5 rounded-full font-bold text-sm tracking-widest uppercase overflow-hidden transition-all duration-500"
           style={{
             background: btnHovered
-              ? "linear-gradient(135deg, #d4af37, #f1e5ac)"
-              : "#d4af37",
-            color: "#120e0a",
+              ? "linear-gradient(135deg, #568a66, #7c9082)"
+              : "#568a66",
+            color: "#0a0a0a",
             boxShadow: btnHovered
-              ? "0 0 60px rgba(212,175,55,0.6), 0 0 120px rgba(212,175,55,0.3)"
-              : "0 0 30px rgba(212,175,55,0.2)",
+              ? "0 0 60px rgba(86,138,102,0.6), 0 0 120px rgba(86,138,102,0.3)"
+              : "0 0 30px rgba(86,138,102,0.2)",
             transform: btnHovered ? "scale(1.05)" : "scale(1)",
           }}
         >
@@ -384,7 +384,7 @@ const Landing = () => {
 
       {/* ─── Bento Grid Section ─── */}
       <section ref={bentoRef} className="relative max-w-5xl mx-auto px-6 pb-40 z-10">
-        <h2 className="text-center text-sm font-semibold tracking-[0.3em] uppercase mb-12" style={{ color: "rgba(212,175,55,0.5)" }}>
+        <h2 className="text-center text-sm font-semibold tracking-[0.3em] uppercase mb-12" style={{ color: "rgba(86,138,102,0.5)" }}>
           What Powers Trevia
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -400,21 +400,20 @@ const Landing = () => {
               clickEffect
               spotlightRadius={400}
               particleCount={12}
-              glowColor="212, 175, 55"
+              glowColor="70, 124, 87"
               disableAnimations={false}
               className={`bento-item rounded-2xl ${item.span}`}
             >
               <div
-                className="p-8 rounded-2xl h-full border transition-all duration-300 hover:shadow-[0_0_40px_rgba(212,175,55,0.15)]"
+                className="p-8 rounded-2xl h-full border transition-all duration-300 hover:shadow-[0_0_40px_rgba(86,138,102,0.15)]"
                 style={{
-                  background: "rgba(18,14,10,0.6)",
-                  borderColor: "rgba(212,175,55,0.15)",
-                  backdropFilter: "blur(20px)",
+                  background: "rgba(10,10,10,0.6)",
+                  borderColor: "rgba(86,138,102,0.15)",
                 }}
               >
-                <div className="mb-4" style={{ color: "#d4af37" }}>{item.icon}</div>
-                <h3 className="text-lg font-bold mb-2" style={{ color: "#d4af37" }}>{item.title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: "rgba(212,175,55,0.6)" }}>{item.desc}</p>
+                <div className="mb-4" style={{ color: "#568a66" }}>{item.icon}</div>
+                <h3 className="text-lg font-bold mb-2" style={{ color: "#568a66" }}>{item.title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "rgba(86,138,102,0.6)" }}>{item.desc}</p>
               </div>
             </MagicBento>
           ))}
@@ -422,7 +421,7 @@ const Landing = () => {
       </section>
 
       {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none" style={{ background: "linear-gradient(to top, #120e0a, transparent)" }} />
+      <div className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none" style={{ background: "linear-gradient(to top, #0a0a0a, transparent)" }} />
 
       <style>{`
         @keyframes shimmer-btn {

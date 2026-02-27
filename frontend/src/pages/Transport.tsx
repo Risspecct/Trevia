@@ -90,8 +90,8 @@ const metroSteps = [
 ];
 
 const comparisonData = [
-  { mode: "Metro+Train", cost: 350, time: 270, safety: 9.0, overall: 8.5, color: "#d4af37" },
-  { mode: "Cab", cost: 2800, time: 195, safety: 8.0, overall: 7.0, color: "#b8860b" },
+  { mode: "Metro+Train", cost: 350, time: 270, safety: 9.0, overall: 8.5, color: "#568a66" },
+  { mode: "Cab", cost: 2800, time: 195, safety: 8.0, overall: 7.0, color: "#467c57" },
   { mode: "Bus", cost: 450, time: 300, safety: 7.5, overall: 6.5, color: "#8a6d3b" },
   { mode: "Self Drive", cost: 1800, time: 210, safety: 7.0, overall: 7.5, color: "#dfc384" },
 ];
@@ -141,7 +141,7 @@ const Transport = () => {
       <div className="relative z-10 max-w-5xl mx-auto p-6 space-y-6">
 
         {/* ── 1. Route Overview ── */}
-        <MagicBento enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={400} particleCount={12} glowColor="212, 175, 55" className="rounded-2xl">
+        <MagicBento enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={400} particleCount={12} glowColor="70, 124, 87" className="rounded-2xl">
           <div className="glass-card gold-border p-6 rounded-2xl">
             {/* Route Selector */}
             <div className="flex flex-col sm:flex-row items-center gap-4 mb-6">
@@ -189,7 +189,7 @@ const Transport = () => {
           <h2 className="text-sm font-semibold tracking-wider uppercase text-muted-foreground mb-4">Choose Your Mode</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {transportModes.map((m) => (
-              <MagicBento key={m.mode} enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={350} particleCount={8} glowColor="212, 175, 55" className="rounded-2xl">
+              <MagicBento key={m.mode} enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={350} particleCount={8} glowColor="70, 124, 87" className="rounded-2xl">
                 <button
                   onClick={() => m.available && setActiveMode(m.mode)}
                   className={`w-full text-left glass-card gold-border p-5 rounded-2xl hover-lift h-full transition-all duration-300 ${activeMode === m.mode ? "ring-2 ring-primary gold-glow" : ""} ${!m.available ? "opacity-50 cursor-not-allowed" : ""}`}
@@ -222,7 +222,7 @@ const Transport = () => {
         </div>
 
         {/* ── 3. Metro + Train Route Preview ── */}
-        <MagicBento enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={400} particleCount={10} glowColor="212, 175, 55" className="rounded-2xl">
+        <MagicBento enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={400} particleCount={10} glowColor="70, 124, 87" className="rounded-2xl">
           <div className="glass-card gold-border p-6 rounded-2xl">
             <h2 className="font-bold text-foreground flex items-center gap-2 mb-5">
               <Train className="w-5 h-5 text-primary" /> Metro + Train Route Preview
@@ -248,7 +248,7 @@ const Transport = () => {
         </MagicBento>
 
         {/* ── 4. Bar Chart Comparison ── */}
-        <MagicBento enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={400} particleCount={10} glowColor="212, 175, 55" className="rounded-2xl">
+        <MagicBento enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={400} particleCount={10} glowColor="70, 124, 87" className="rounded-2xl">
           <div className="glass-card gold-border p-6 rounded-2xl">
             <h2 className="font-bold text-foreground mb-5">📊 Route Comparison</h2>
             <p className="text-xs text-muted-foreground mb-4">Comparing Cost (₹), Travel Time (min), and Safety Score across modes</p>
@@ -286,7 +286,7 @@ const Transport = () => {
         {/* ── 5. Live Vehicle Distance ── */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {/* Cabs */}
-          <MagicBento enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={300} particleCount={6} glowColor="212, 175, 55" className="rounded-2xl lg:col-span-2">
+          <MagicBento enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={300} particleCount={6} glowColor="70, 124, 87" className="rounded-2xl lg:col-span-2">
             <div className="glass-card gold-border p-5 rounded-2xl h-full">
               <h3 className="font-bold text-foreground flex items-center gap-2 mb-4">
                 <Car className="w-4 h-4 text-primary" /> Nearby Cabs
@@ -307,7 +307,7 @@ const Transport = () => {
 
           {/* Bus + Metro */}
           <div className="space-y-4">
-            <MagicBento enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={250} particleCount={5} glowColor="212, 175, 55" className="rounded-2xl">
+            <MagicBento enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={250} particleCount={5} glowColor="70, 124, 87" className="rounded-2xl">
               <div className="glass-card gold-border p-5 rounded-2xl">
                 <h3 className="font-bold text-foreground flex items-center gap-2 mb-3">
                   <Bus className="w-4 h-4 text-primary" /> Next Bus
@@ -321,7 +321,7 @@ const Transport = () => {
               </div>
             </MagicBento>
 
-            <MagicBento enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={250} particleCount={5} glowColor="212, 175, 55" className="rounded-2xl">
+            <MagicBento enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={250} particleCount={5} glowColor="70, 124, 87" className="rounded-2xl">
               <div className="glass-card gold-border p-5 rounded-2xl">
                 <h3 className="font-bold text-foreground flex items-center gap-2 mb-3">
                   <Train className="w-4 h-4 text-primary" /> Next Metro
@@ -337,7 +337,7 @@ const Transport = () => {
         </div>
 
         {/* ── 6. Safety Intelligence ── */}
-        <MagicBento enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={400} particleCount={10} glowColor="212, 175, 55" className="rounded-2xl">
+        <MagicBento enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={400} particleCount={10} glowColor="70, 124, 87" className="rounded-2xl">
           <div className="glass-card gold-border p-6 rounded-2xl">
             <h2 className="font-bold text-foreground flex items-center gap-2 mb-4">
               <Shield className="w-5 h-5 text-primary" /> Safety Intelligence
@@ -365,7 +365,7 @@ const Transport = () => {
         </MagicBento>
 
         {/* ── 7. AI Suggestion Banner ── */}
-        <MagicBento enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={500} particleCount={14} glowColor="212, 175, 55" className="rounded-2xl">
+        <MagicBento enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={500} particleCount={14} glowColor="70, 124, 87" className="rounded-2xl">
           <div className="p-6 rounded-2xl border border-primary/30" style={{ background: "linear-gradient(135deg, hsl(var(--primary) / 0.08), hsl(var(--accent) / 0.05))" }}>
             <div className="flex items-start gap-4">
               <div className="w-10 h-10 rounded-xl bg-primary/15 flex items-center justify-center shrink-0">
@@ -394,7 +394,7 @@ const Transport = () => {
           <h2 className="text-sm font-semibold tracking-wider uppercase text-muted-foreground mb-4">Premium Features</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
             {premiumFeatures.map((f, i) => (
-              <MagicBento key={i} enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={200} particleCount={4} glowColor="212, 175, 55" className="rounded-xl">
+              <MagicBento key={i} enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={200} particleCount={4} glowColor="70, 124, 87" className="rounded-xl">
                 <div className="glass-card gold-border p-4 rounded-xl text-center hover-lift h-full flex flex-col items-center justify-center gap-2">
                   <div className="text-primary">{f.icon}</div>
                   <p className="text-xs font-medium text-foreground">{f.label}</p>

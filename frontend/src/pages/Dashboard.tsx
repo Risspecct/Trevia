@@ -50,7 +50,7 @@ const Dashboard = () => {
 
       {/* Central glow effect */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full blur-[180px] pointer-events-none z-0"
-        style={{ background: "radial-gradient(circle, rgba(214,186,158,0.12), transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, rgba(86,138,102,0.12), transparent 70%)" }}
       />
 
       <header className="relative z-10 flex items-center justify-between px-6 py-4 border-b border-border">
@@ -78,7 +78,7 @@ const Dashboard = () => {
           clickEffect
           spotlightRadius={400}
           particleCount={12}
-          glowColor="212, 175, 55"
+          glowColor="70, 124, 87"
           className="form-section rounded-2xl"
         >
           <div className="glass-card gold-border p-6 rounded-2xl space-y-3">
@@ -105,7 +105,7 @@ const Dashboard = () => {
           clickEffect
           spotlightRadius={400}
           particleCount={12}
-          glowColor="212, 175, 55"
+          glowColor="70, 124, 87"
           className="form-section rounded-2xl"
         >
           <div className="glass-card gold-border p-6 rounded-2xl space-y-4">
@@ -142,7 +142,7 @@ const Dashboard = () => {
             clickEffect
             spotlightRadius={400}
             particleCount={8}
-            glowColor="212, 175, 55"
+            glowColor="70, 124, 87"
             className="rounded-2xl"
           >
             <div className="glass-card gold-border p-6 rounded-2xl space-y-3 h-full">
@@ -176,7 +176,7 @@ const Dashboard = () => {
             clickEffect
             spotlightRadius={400}
             particleCount={8}
-            glowColor="212, 175, 55"
+            glowColor="70, 124, 87"
             className="rounded-2xl"
           >
             <div className="glass-card gold-border p-6 rounded-2xl space-y-3 h-full">
@@ -212,7 +212,7 @@ const Dashboard = () => {
           clickEffect
           spotlightRadius={400}
           particleCount={12}
-          glowColor="212, 175, 55"
+          glowColor="70, 124, 87"
           className="form-section rounded-2xl"
         >
           <div className="glass-card gold-border p-6 rounded-2xl space-y-3">
@@ -241,7 +241,7 @@ const Dashboard = () => {
           clickEffect
           spotlightRadius={400}
           particleCount={12}
-          glowColor="212, 175, 55"
+          glowColor="70, 124, 87"
           className="form-section rounded-2xl"
         >
           <div className="glass-card gold-border p-6 rounded-2xl space-y-3">
