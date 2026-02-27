@@ -3,6 +3,7 @@ from serpapi import Client
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from dotenv import load_dotenv
 
+
 class ReviewEngine:
     def __init__(self):
         load_dotenv()
@@ -103,7 +104,7 @@ class ReviewEngine:
                 "score": worst_review.get("final_score")
             }
         }
-    
+
     # Public Method: Get Best & Worst Review
     def get_best_and_worst_review(self, place_name: str) -> dict:
         data_id = self.get_place_data_id(place_name)
