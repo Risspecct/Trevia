@@ -1,0 +1,707 @@
+[{
+  "state": "Goa",
+  "guardian_info": {
+    "dos": [
+      "Carry your passport and valid visa at all times for check-ins and law enforcement.",
+      "Respect dress codes in religious places by covering shoulders and knees.",
+      "Only exchange currency at authorized banks or money changers and insist on a receipt.",
+      "Listen to lifeguards and swim only in designated safe zones between checkered flags.",
+      "Remove footwear before entering temples, mosques, or local homes."
+    ],
+    "donts": [
+      "Do not consume alcohol or drugs on any beaches; it is a punishable offense.",
+      "Do not take photographs of military sites, government buildings, or sensitive religious rituals without permission.",
+      "Do not encourage beggars or buy products made from rare/endangered animals.",
+      "Do not accept food or drinks from strangers or enter the water after sunset.",
+      "Do not wear revealing clothing outside of pool areas or beaches."
+    ],
+    "useful_phrases": {
+      "language": "Konkani/Hindi",
+      "phrases": [
+        { "english": "Hello", "local": "Namaste / Namaskar" },
+        { "english": "Thank you", "local": "Dhanyabaad / Shukriya" },
+        { "english": "How much does this cost?", "local": "Kitna hai? (Hindi)" },
+        { "english": "Please help me", "local": "Madad kijiye" },
+        { "english": "Call the police", "local": "Police ko bulaiye" },
+        { "english": "I need a doctor", "local": "Mujhe doctor ki zaroorat hai" }
+      ]
+    },
+    "tourist_essentials": {
+      "emergency_numbers": {
+        "police": "100",
+        "ambulance": "108",
+        "tourist_helpline": "1800-111-363"
+      },
+      "common_scams": [
+        "Taxi Mafia: Drivers quoting inflated rates or claiming hotels are closed.",
+        "The 'Flower' or 'Bracelet' gift scam: Strangers offering 'gifts' then demanding payment.",
+        "Fake Guides: Individuals offering tours at low costs who are not government-certified."
+      ],
+      "health_safety": [
+        "Drink only bottled or filtered water; avoid ice in drinks from street stalls.",
+        "Use ride-hailing apps like Uber or Ola for transparent pricing.",
+        "Ensure vaccinations (Hepatitis A, Typhoid) are up to date."
+      ]
+    }
+  }
+},
+{
+  "state_metadata": {
+    "name": "Uttar Pradesh",
+    "capital": "Lucknow",
+    "primary_language": "Hindi/Urdu",
+    "tourist_police": true,
+    "emergency_contacts": {
+      "police": "112",
+      "ambulance": "108",
+      "fire": "101",
+      "women_helpline": "1090",
+      "tourist_police_station": "+91-9454402764"
+    }
+  },
+  "guardian_content": {
+    "dos": [
+      "Hire only UP Tourism Department certified guides; verify their ID cards before starting.",
+      "Book entry tickets for monuments like the Taj Mahal only at official ASI counters or the official website.",
+      "Dress conservatively in Varanasi and Mathura; cover shoulders and knees to respect local religious sentiments.",
+      "Use prepaid taxi/auto booths at major railway stations like Agra Cantt or Varanasi Junction.",
+      "Remove footwear and leave them at designated 'Joota Chappal' stands before entering any temple or mosque."
+    ],
+    "donts": [
+      "Do NOT take photographs of cremation rituals at the Manikarnika or Harishchandra Ghats in Varanasi; it is considered deeply disrespectful.",
+      "Do not accept 'Bhang Lassi' or edibles from strangers; only try traditional items from government-approved shops.",
+      "Avoid bathing in the Ganga River unless in a specifically designated, safe, and clean zone.",
+      "Do not buy 'antique' jewelry or carpets from touts on the street; they are almost always fakes or overpriced.",
+      "Avoid visiting the night view of the Taj Mahal during the month of Ramadan as access is often restricted."
+    ],
+    "local_phrases": {
+      "language": "Hindi",
+      "phrases": [
+        { "english": "Where is the Taj Mahal?", "local": "Taj Mahal ka raasta kaun sa hai?" },
+        { "english": "Please reduce the price.", "local": "Thoda kam kijiye / Kam kar do" },
+        { "english": "Is this food spicy?", "local": "Kya yeh khana teekha hai?" },
+        { "english": "I need help.", "local": "Mujhe madad chahiye / Madad kijiye" },
+        { "english": "Go straight then turn left.", "local": "Seedhe jaiye fir baaye mudiye" }
+      ]
+    },
+    "critical_alerts": [
+      "Scam Alert: 'Hotel Closed' Scam—Touts at Agra railway station may tell you your hotel burned down or is in a riot zone to redirect you to their commission-based stays.",
+      "Pollution Alert: Air quality in Agra and Varanasi can be severe from October to February; carry an N95 mask if you have respiratory issues.",
+      "Animal Safety: Watch out for aggressive monkeys near the Monkey Temple in Varanasi and the Taj Mahal perimeter; do not carry food in open bags."
+    ]
+  }
+},
+{
+  "state_metadata": {
+    "name": "Maharashtra",
+    "capital": "Mumbai",
+    "primary_language": "Marathi",
+    "tourist_police": true,
+    "emergency_contacts": {
+      "police": "112",
+      "ambulance": "108",
+      "fire": "101",
+      "women_helpline": "1091",
+      "tourist_helpline": "022-22621855"
+    }
+  },
+  "guardian_content": {
+    "dos": [
+      "Greet locals with 'Namaskar' (hands folded) as a sign of respect, especially with elders.",
+      "Use 'm-Indicator' or official apps to track local train timings and routes in Mumbai and Pune.",
+      "Always remove footwear before entering any shrine or a local's home.",
+      "Drink only bottled water and ensure the seal is intact; avoid ice from street vendors.",
+      "Travel in the 'General' or 'First Class' compartments on local trains; avoid 'Ladies' coaches if you are male."
+    ],
+    "donts": [
+      "Do NOT use your left hand for eating or passing objects; it is considered unhygienic.",
+      "Avoid wearing sleeveless tops or shorts when visiting the Ajanta and Ellora Caves or local temples.",
+      "Do not take photographs of people, especially women, without asking for explicit permission first.",
+      "Avoid public displays of affection (PDA) like intimate kissing; it can attract unwanted attention or fines.",
+      "Do not feed monkeys or wild animals at hill stations like Matheran or Mahabaleshwar; they can become aggressive."
+    ],
+    "local_phrases": {
+      "language": "Marathi",
+      "phrases": [
+        { "english": "Hello / Greetings", "local": "Namaskar (नमस्कार)" },
+        { "english": "Thank you", "local": "Dhanyavad (धन्यवाद)" },
+        { "english": "How much is this?", "local": "Yachi kimmat kay aahe? (याची किंमत काय आहे?)" },
+        { "english": "Where is the bathroom?", "local": "Shauchalay kuthe aahe? (शौचालय कुठे आहे?)" },
+        { "english": "Please help me.", "local": "Krupaya mala madat kara (कृपया मला मदत करा)" }
+      ]
+    },
+    "critical_alerts": [
+      "Transport Alert: Only use official metered taxis or ride-hailing apps like Uber/Ola; refuse drivers who claim their meter is 'broken'.",
+      "Coastal Safety: The Konkan coast has strong undercurrents; only swim in designated areas and never enter the water after sunset.",
+      "Local Train Rush: Avoid Mumbai local trains during peak hours (8:00–11:00 AM and 6:00–9:00 PM) as the crowd can be dangerous for those unfamiliar."
+    ]
+  }
+},
+{
+  "state_metadata": {
+    "name": "Bihar",
+    "capital": "Patna",
+    "primary_language": "Hindi/Maithili/Bhojpuri",
+    "tourist_police": true,
+    "emergency_contacts": {
+      "police": "112",
+      "ambulance": "102 / 108",
+      "fire": "101",
+      "women_helpline": "1091",
+      "bihar_tourism_helpline": "+91-612-2217045"
+    }
+  },
+  "guardian_content": {
+    "dos": [
+      "Remove footwear before entering the Mahabodhi Temple or any religious site.",
+      "Dress modestly; cover your shoulders and knees, especially in sacred towns like Gaya and Rajgir.",
+      "Hire only government-registered guides at Nalanda and Bodh Gaya to avoid misinformation.",
+      "Accept 'Prasad' (religious offering) with your right hand as a sign of respect.",
+      "Use authorized prepaid taxis from Patna Airport or Gaya Railway Station."
+    ],
+    "donts": [
+      "Do NOT carry or consume alcohol; Bihar is a strictly 'Dry State' with severe legal penalties.",
+      "Do not photograph the inner sanctums of temples unless explicitly allowed.",
+      "Avoid traveling to remote village areas alone after sunset.",
+      "Do not accept food or drinks from strangers on long-distance trains.",
+      "Avoid touching religious statues or pointing your feet toward them."
+    ],
+    "local_phrases": {
+      "language": "Hindi (Widely understood)",
+      "phrases": [
+        { "english": "Hello / Respectful Greeting", "local": "Pranaam (प्रणाम) / Namaste" },
+        { "english": "Where is Bodh Gaya?", "local": "Bodh Gaya kahan hai?" },
+        { "english": "I need help.", "local": "Kripya meri madad kijiye" },
+        { "english": "No alcohol.", "local": "Sharaab nahi chahiye" },
+        { "english": "Thank you.", "local": "Dhanyawaad (धन्यवाद)" }
+      ]
+    },
+    "critical_alerts": [
+      "Strict Prohibition: Being found with even a small amount of alcohol can lead to immediate arrest and no-bail detention.",
+      "Health Alert: Use only bottled water; Gaya and Patna can be prone to water-borne issues during monsoons.",
+      "Scam Alert: Beware of 'fake monks' in Bodh Gaya asking for large donations for 'orphanages'; donate only to registered monasteries."
+    ]
+  }
+},
+{
+  "state_metadata": {
+    "name": "West Bengal",
+    "capital": "Kolkata",
+    "primary_language": "Bengali",
+    "tourist_police": true,
+    "emergency_contacts": {
+      "police": "100 / 112",
+      "ambulance": "102 / 108",
+      "fire": "101",
+      "women_helpline": "1091",
+      "tourism_helpline": "033-22436440"
+    }
+  },
+  "guardian_content": {
+    "dos": [
+      "Greet people with 'Nomoshkar' (folded hands); it is the standard respectful greeting in Bengal.",
+      "Use 'Dada' (older brother) or 'Didi' (older sister) to respectfully address male and female service providers.",
+      "Try the iconic 'Mishti Doi' (sweet yogurt) and 'Rosogulla', but only from reputable sweet shops.",
+      "When visiting the Sundarbans, always stay inside the boat and follow the guide's instructions strictly.",
+      "Remove footwear before entering shrines or local homes; dress modestly in North Kolkata and religious zones."
+    ],
+    "donts": [
+      "Do NOT drink raw 'Date Palm Sap' (Khejur Ras); it is a major vector for the Nipah Virus in rural Bengal.",
+      "Avoid public displays of affection (PDA) like kissing or hugging, especially near religious or residential areas.",
+      "Do not enter the Sundarban Tiger Reserve without a forest department-approved guide and permit.",
+      "Avoid touching people or passing objects/food with your left hand; it is considered disrespectful.",
+      "Do not take photographs of people, especially at sensitive sites like the Kalighat Temple, without permission."
+    ],
+    "local_phrases": {
+      "language": "Bengali",
+      "phrases": [
+        { "english": "Hello / Greeting", "local": "Nomoshkar (নমস্কার)" },
+        { "english": "Thank you", "local": "Dhonnobad (ধন্যবাদ)" },
+        { "english": "How much is this?", "local": "Eta koto dam? (এটা কত দাম?)" },
+        { "english": "Where is the toilet?", "local": "Toilet kothay? (টয়লেট কোথায়?)" },
+        { "english": "Help!", "local": "Bachao! (বাঁচাও!) / Shahajjo korun!" }
+      ]
+    },
+    "critical_alerts": [
+      "Health Alert (2026): Localized Nipah Virus clusters reported near Kolkata. Avoid raw date juice and partially eaten fruits.",
+      "Transport Alert: Only use official 'Yellow Taxis' or ride-hailing apps (Uber/Ola). Insist on the meter or use the prepaid booth at Howrah Station.",
+      "Scam Alert: Beware of 'fake guides' near the Victoria Memorial or Dakshineswar Temple who charge exorbitant fees."
+    ]
+  }
+},
+{
+  "state_metadata": {
+    "name": "Madhya Pradesh",
+    "capital": "Bhopal",
+    "primary_language": "Hindi",
+    "tourist_police": true,
+    "emergency_contacts": {
+      "police_emergency": "112 / 100",
+      "ambulance": "108",
+      "fire": "101",
+      "women_helpline": "1090 / 1091",
+      "tourism_support": "0755-2550588",
+      "cyber_crime": "1930"
+    }
+  },
+  "guardian_content": {
+    "dos": [
+      "Carry layered clothing; mornings and nights can be significantly cooler than the daytime in February.",
+      "Hire official naturalists or guides provided by the Forest Department for jungle safaris in Kanha or Bandhavgarh.",
+      "Remove footwear before entering the Mahakaleshwar Temple (Ujjain) or Sanchi Stupa platforms.",
+      "Stay hydrated and use sun protection, as the central Indian sun can be intense even in winter.",
+      "Use 'Dial 112'—Madhya Pradesh has integrated all emergency services into this single rapid-response number."
+    ],
+    "donts": [
+      "Do NOT exit your vehicle during a wildlife safari unless at a designated 'Point' marked safe by your guide.",
+      "Avoid traveling to remote forested areas or lonely sites like Bhimbetka alone after sunset.",
+      "Do not bring satellite phones or unauthorized GPS devices; they are illegal and carry heavy penalties.",
+      "Do not photograph sensitive tribal rituals or military installations without explicit permission.",
+      "Avoid public displays of affection in religious towns like Ujjain and Omkareshwar."
+    ],
+    "local_phrases": {
+      "language": "Hindi",
+      "phrases": [
+        { "english": "Hello / Greeting", "local": "Namaste (नमस्ते)" },
+        { "english": "Where is the Tiger Reserve?", "local": "Tiger reserve kahan hai?" },
+        { "english": "Please reduce the price.", "local": "Kam kar do (कम कर दो)" },
+        { "english": "I am lost.", "local": "Main kho gaya hoon (मई खो गया हूँ)" },
+        { "english": "Help me!", "local": "Meri madad kijiye (मेरी मदद कीजिये)" }
+      ]
+    },
+    "critical_alerts": [
+      "Cyber Alert (Feb 2026): Beware of 'Deepfake' scams—fraudsters are using AI-morphed video calls of relatives to extort money from tourists in Indore.",
+      "Wildlife Alert: Elephant and tiger activity is high this season; always maintain a safe distance and never feed animals.",
+      "Weather Alert: Dense fog is common in early mornings through February, which can significantly delay travel and reduce road visibility."
+    ]
+  }
+},
+{
+  "state_metadata": {
+    "name": "Tamil Nadu",
+    "capital": "Chennai",
+    "primary_language": "Tamil",
+    "tourist_police": true,
+    "emergency_contacts": {
+      "police": "112 / 100",
+      "ambulance": "108",
+      "fire": "101",
+      "women_helpline": "1091",
+      "tourist_enquiry": "1913"
+    }
+  },
+  "guardian_content": {
+    "dos": [
+      "Greet people with 'Vanakkam' (folded hands) as it is the most respected greeting.",
+      "Dress modestly in temples: men should wear dhotis or trousers (no shorts), and women should cover shoulders and knees.",
+      "Remove footwear and leave them at designated stands (Kovil Joota Stand) before entering temple premises.",
+      "Use only your right hand for eating, shaking hands, or passing objects; the left hand is traditionally considered unclean.",
+      "Drink only sealed bottled water from reputable brands like Bisleri or Kinley."
+    ],
+    "donts": [
+      "Do NOT photograph deities or the inner sanctums of temples; many ancient temples strictly ban photography inside.",
+      "Avoid public displays of affection (PDA), such as hugging or kissing, which can lead to legal fines or harassment.",
+      "Do not enter the sea at Marina Beach (Chennai); strong undercurrents make it extremely dangerous for swimming.",
+      "Avoid visiting forest reserves or hill stations like Ooty alone after 7 PM due to wildlife activity (elephants/leopards).",
+      "Do not wear black clothing in mosquito-prone areas as it attracts insects."
+    ],
+    "local_phrases": {
+      "language": "Tamil",
+      "phrases": [
+        { "english": "Hello / Greetings", "local": "Vanakkam (வணக்கம்)" },
+        { "english": "Thank you", "local": "Nandri (நன்றி)" },
+        { "english": "How much is this?", "local": "Idhu evlo? (இது எவ்ளோ?)" },
+        { "english": "Where is the hospital?", "local": "Maruthuvamanai enge? (மருத்துவமனை எங்கே?)" },
+        { "english": "Please help me.", "local": "Udhavi seyyunga (உதவி செய்யுங்கள்)" }
+      ]
+    },
+    "critical_alerts": [
+      "Scam Alert: 'Flower/Bindi Blessing'—Touts near temples may tie a thread or hand you a flower 'for free' then demand large donations.",
+      "Climate Alert: October to December is the Northeast Monsoon season; heavy rains can cause sudden urban flooding in Chennai.",
+      "Transport Alert: Only use ride-hailing apps (Uber/Ola). Auto-rickshaw drivers at stations often quote 3-5x the actual fare to foreigners."
+    ]
+  }
+},
+{
+  "state_metadata": {
+    "name": "Rajasthan",
+    "capital": "Jaipur",
+    "primary_language": "Hindi / Marwari",
+    "tourist_police": true,
+    "emergency_contacts": {
+      "police": "112 / 100",
+      "ambulance": "108 / 102",
+      "fire": "101",
+      "women_helpline": "1090 / 1091",
+      "tourist_helpline": "1800-111-363",
+      "tourist_assistance_force": "0141-2822800"
+    }
+  },
+  "guardian_content": {
+    "dos": [
+      "Address elders and locals with 'Khamma Ghani' (traditional greeting) or 'Namaste' with a slight head nod.",
+      "Remove footwear before entering any temple, mosque, or local home; follow the 'Parikrama' (clockwise walk) around shrines.",
+      "Carry sufficient cash (small denominations) when traveling to rural areas or desert camps, as digital payments are less common there.",
+      "Hire only government-authorized guides who carry a laminated photo ID with a hologram.",
+      "Accept offered tea (Masala Chai) or water in local homes as a sign of respect, even if you only take a small sip."
+    ],
+    "donts": [
+      "Do NOT buy gemstones, jewelry, or expensive carpets without a government-recognized authenticity certificate.",
+      "Avoid wearing sleeveless tops, shorts, or revealing clothing in temples and rural villages; keep shoulders and knees covered.",
+      "Do not point your feet toward people, religious idols, or holy books, as feet are considered impure.",
+      "Avoid feeding monkeys or stray animals at forts like Amer or Mehrangarh; they can be aggressive and may bite.",
+      "Do not rely solely on Google Maps in narrow 'Pol' (alleyways) of old cities like Jodhpur or Udaipur; ask locals for directions."
+    ],
+    "local_phrases": {
+      "language": "Marwari / Hindi",
+      "phrases": [
+        { "english": "Welcome to my land", "local": "Padharo Mhare Des (पधारो म्हारे देस)" },
+        { "english": "Greetings (Royal)", "local": "Khamma Ghani (खम्मा घणी)" },
+        { "english": "How much is this?", "local": "Yo kitra ro hai? (Hindi: Iska kitna hai?)" },
+        { "english": "Where is the fort?", "local": "Quila kahan hai? (क़िला कहाँ है?)" },
+        { "english": "Water", "local": "Paani (पानी)" }
+      ]
+    },
+    "critical_alerts": [
+      "Gemstone Scam: Beware of strangers at Jaipur markets offering 'export deals' or claiming they need help shipping 'rare gems' to your country.",
+      "Climate Alert: Rajasthan experiences extreme temperature shifts. Winter nights (Dec-Feb) in the desert can drop near 0°C, while days remain sunny.",
+      "Camel Safari Scam: Confirm the 'per person' vs 'total' price and the exact duration before mounting a camel in Jaisalmer to avoid extortion at the end.",
+      "Holi Safety (March 2026): If traveling during Holi, avoid 'Bhang' (cannabis) drinks from street vendors as they are often unregulated and dangerously potent."
+    ]
+  }
+},
+{
+  "state_metadata": {
+    "name": "Karnataka",
+    "capital": "Bengaluru",
+    "primary_language": "Kannada",
+    "tourist_police": true,
+    "emergency_contacts": {
+      "integrated_emergency": "112",
+      "police": "100",
+      "ambulance": "108",
+      "women_helpline": "1091",
+      "cyber_crime_helpline": "1930",
+      "tourist_helpline": "1800-111-363"
+    }
+  },
+  "guardian_content": {
+    "dos": [
+      "Greet locals with 'Namaskāra' (ನಮಸ್ಕಾರ); it is the universal and most respected greeting in Karnataka.",
+      "Respect the local language; even learning a few Kannada words like 'Dhanyavāda' (Thank you) goes a long way in building rapport.",
+      "Follow strict temple dress codes: Women should wear sarees or long skirts; men are often required to wear dhotis (panche) and remove shirts in coastal temples like Udupi.",
+      "Use 'm-Indicator' or Namma Metro apps for efficient transit in Bengaluru; it's much safer and cheaper than unmetered autos.",
+      "Remove footwear before entering homes and the main sanctums of any temple or mosque."
+    ],
+    "donts": [
+      "Do NOT scan any QR code to 'receive' money; in India, you only need your PIN to SEND money, never to receive a refund.",
+      "Avoid discussing sensitive political or linguistic topics (e.g., Kannada vs. Hindi debates) in public spaces.",
+      "Do not wear shorts or sleeveless tops in religious sites; you may be denied entry to major heritage temples.",
+      "Avoid consuming street food that isn't freshly cooked or uses tap-water ice, especially during the monsoon.",
+      "Do not point your feet toward people or religious idols, as feet are considered the lowliest part of the body."
+    ],
+    "local_phrases": {
+      "language": "Kannada",
+      "phrases": [
+        { "english": "Hello", "local": "Namaskāra (ನಮಸ್ಕಾರ)" },
+        { "english": "Thank you", "local": "Dhanyavādagalu (ಧನ್ಯವಾದಗಳು)" },
+        { "english": "How much?", "local": "Eshtu? (ಎಷ್ಟು?)" },
+        { "english": "I don't know Kannada", "local": "Kannada gothilla" },
+        { "english": "Where is the bus stand?", "local": "Bus stand elli? (ಬಸ್ ನಿಲ್ದಾಣ ಎಲ್ಲಿ?)" },
+        { "english": "Help!", "local": "Sahāya mādi! (ಸಹಾಯ ಮಾಡಿ!)" }
+      ]
+    },
+    "critical_alerts": [
+      "Cyber Alert (2026): Bengaluru is seeing a surge in 'Courier Scams'—if you get a call about an illegal package in your name, HANG UP. It is a fake police extortion tactic.",
+      "Transport Alert: Auto-rickshaw drivers in Bengaluru often refuse to use meters. Use Uber, Ola, or Rapido to ensure fair, tracked pricing.",
+      "Temple Alert: Photography is strictly prohibited inside the inner sanctums of most Karnataka temples. Check for signs before taking your camera out."
+    ]
+  }
+},
+{
+  "state_metadata": {
+    "name": "Gujarat",
+    "capital": "Gandhinagar",
+    "primary_language": "Gujarati",
+    "tourist_police": true,
+    "emergency_contacts": {
+      "integrated_emergency": "112",
+      "police": "100",
+      "ambulance": "108",
+      "fire": "101",
+      "women_helpline": "181 / 1091",
+      "health_helpline": "104",
+      "tourist_helpline": "1800-233-7951"
+    }
+  },
+  "guardian_content": {
+    "dos": [
+      "Greet with 'Kem cho?' (How are you?) or 'Namaste'. Locals appreciate the use of Gujarati greetings.",
+      "Apply for a liquor permit online before arrival if you wish to purchase alcohol at authorized outlets.",
+      "Dress modestly when visiting temples like Somnath or Dwarka; men and women should cover shoulders and knees.",
+      "Hire only Forest Department-approved guides for Asiatic Lion safaris in Gir National Park.",
+      "Carry your original passport and visa at all times, as they are required for hotel check-ins and liquor permits."
+    ],
+    "donts": [
+      "Do NOT carry or consume alcohol in public; Gujarat is a dry state with strict imprisonment for violators.",
+      "Avoid wearing leather items (belts, bags) when entering Jain temples (e.g., Palitana), as they are strictly prohibited.",
+      "Do not take photos of airports, military sites, or the inner sanctums of religious sites without permission.",
+      "Avoid traveling to remote border areas (near Pakistan) without specific government permits.",
+      "Do not accept 'free' flowers or threads at temples; these are often used as high-pressure donation scams."
+    ],
+    "local_phrases": {
+      "language": "Gujarati",
+      "phrases": [
+        { "english": "Hello / Greetings", "local": "Namaste (નમસ્તે)" },
+        { "english": "How are you?", "local": "Kem cho? (કેમ છો?)" },
+        { "english": "I am fine.", "local": "Hu maza ma chu (હું મજામાં છું)" },
+        { "english": "Thank you", "local": "Aabhar (આભાર) / Dhanyavaad" },
+        { "english": "Where is the toilet?", "local": "Toilet kyan che? (ટોયલેટ ક્યાં છે?)" },
+        { "english": "Goodbye", "local": "Aavjo (આવજો) - translates to 'Come back again'" }
+      ]
+    },
+    "critical_alerts": [
+      "Alcohol Prohibition: Statewide prohibition is strictly enforced. GIFT City (Gandhinagar) is the ONLY zone where foreigners can drink at designated hotels without a permit.",
+      "Digital Scam Alert: Beware of fake 'Liquor Permit' websites. Only use the official government portal (eps.gpeonline.co.in).",
+      "Climate Alert: The Rann of Kutch can be extremely hot during the day but cold at night; carry layered clothing and stay hydrated."
+    ]
+  }
+},
+{
+  "state_metadata": {
+    "name": "Kerala",
+    "capital": "Thiruvananthapuram",
+    "primary_language": "Malayalam",
+    "tourist_police": true,
+    "emergency_contacts": {
+      "integrated_emergency": "112",
+      "police": "100",
+      "ambulance": "108",
+      "fire": "101",
+      "women_helpline": "1091",
+      "tourist_police_kochi": "0484-2224055"
+    }
+  },
+  "guardian_content": {
+    "dos": [
+      "Greet locals with 'Namaskaram'; it is the most polite and widely accepted greeting.",
+      "Follow strict temple dress codes: Many temples (like Padmanabhaswamy) require men to wear only a Mundu (dhoti) and remain bare-chested.",
+      "Book houseboats only through registered operators with valid licenses from the Department of Tourism.",
+      "Use only the right hand for eating or passing objects to others.",
+      "Ensure you have a valid prescription if carrying any specific medications, as Kerala has strict pharmacy regulations."
+    ],
+    "donts": [
+      "Do NOT smoke or consume alcohol in public places; it is a punishable offense with heavy fines.",
+      "Avoid entering the backwaters or sea during the heavy monsoon (June–August) due to high water levels and strong currents.",
+      "Do not take photographs inside temples; most Kerala temples strictly ban cameras and mobile phones inside the walls.",
+      "Avoid public displays of affection (PDA); Kerala is culturally conservative regarding physical intimacy in public.",
+      "Do not feed or touch wildlife, especially elephants at festivals, as they can be unpredictable and dangerous."
+    ],
+    "local_phrases": {
+      "language": "Malayalam",
+      "phrases": [
+        { "english": "Hello / Greetings", "local": "Namaskaram (നമസ്കാരം)" },
+        { "english": "Thank you", "local": "Nanni (നന്ദി)" },
+        { "english": "How much is this?", "local": "Ithinụ ethraya vila? (ഇതിന് എത്രയാ വില?)" },
+        { "english": "Where is the bathroom?", "local": "Bathroom evideya? (ബാത്ത്റൂം എവിടെയാ?)" },
+        { "english": "Help me.", "local": "Enne sahayikku (എന്നെ സഹായിക്കൂ)" }
+      ]
+    },
+    "critical_alerts": [
+      "Alcohol Restriction: Alcohol is only available in 5-star hotels and government-run 'BEVCO' outlets. Sunday is a dry day in many areas.",
+      "Health Alert (2026): Monsoon seasons often see a rise in Dengue and Leptospirosis. Use mosquito repellent and avoid walking in stagnant water.",
+      "Transport Alert: Only use authorized 'Yellow-Black' taxis or ride-hailing apps like Uber/Ola in cities like Kochi and Trivandrum."
+    ]
+  }
+},
+{
+  "state_metadata": {
+    "name": "Punjab",
+    "capital": "Chandigarh",
+    "primary_language": "Punjabi",
+    "tourist_police": true,
+    "emergency_contacts": {
+      "integrated_emergency": "112",
+      "police": "100",
+      "ambulance": "108",
+      "fire": "101",
+      "women_helpline": "1091",
+      "tourist_police_amritsar": "0183-2223538"
+    }
+  },
+  "guardian_content": {
+    "dos": [
+      "Cover your head with a scarf or bandana before entering any Gurudwara (Sikh temple); it is a mandatory sign of respect.",
+      "Wash your hands and feet (at the provided water troughs) before stepping onto the marble floor of the Golden Temple.",
+      "Accept 'Karah Parshad' (sanctified halwa) with both hands cupped together.",
+      "Greet locals with 'Sat Sri Akal' (God is Truth), which is the most respected greeting among the Sikh community.",
+      "Try 'Langar' (community kitchen) at the Golden Temple; it is free for everyone, but ensure you sit on the floor and finish everything on your plate."
+    ],
+    "donts": [
+      "Do NOT smoke, consume alcohol, or use tobacco products near any Gurudwara or religious site; it is strictly prohibited and offensive.",
+      "Do not point your feet toward the Guru Granth Sahib (Holy Book) or any religious shrine.",
+      "Avoid wearing shorts or sleeveless tops when visiting religious places; keep legs and shoulders fully covered.",
+      "Do not take photographs inside the inner sanctum of the Golden Temple (Harmandir Sahib); photography is usually only allowed in the outer walkway (Prakarma).",
+      "Avoid entering restricted border zones near the Wagah-Attari border without following official gate timings and security protocols."
+    ],
+    "local_phrases": {
+      "language": "Punjabi",
+      "phrases": [
+        { "english": "Hello / Greetings", "local": "Sat Sri Akal (ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ)" },
+        { "english": "Thank you", "local": "Dhanvaad (ਧੰਨਵਾਦ)" },
+        { "english": "How are you?", "local": "Ki haal hai? (ਕੀ ਹਾਲ ਹੈ?)" },
+        { "english": "Where is the Golden Temple?", "local": "Darbar Sahib kithay hai?" },
+        { "english": "Help!", "local": "Meri madad karo!" }
+      ]
+    },
+    "critical_alerts": [
+      "Border Security: The Wagah Border ceremony is highly crowded. Reach at least 2 hours early and carry your passport as ID for the foreign tourist gallery.",
+      "Agricultural Alert: During the stubble-burning seasons (Oct-Nov and April-May), air quality can drop significantly; carry an N95 mask if you are asthmatic.",
+      "Drug Awareness: While Punjab is a land of milk and honey, it has specific regions with drug-related sensitivities. Avoid isolated border-area villages after dark."
+    ]
+  }
+},
+{
+  "state_metadata": {
+    "name": "Punjab",
+    "capital": "Chandigarh",
+    "primary_language": "Punjabi",
+    "tourist_police": true,
+    "emergency_contacts": {
+      "integrated_emergency": "112",
+      "police": "100",
+      "ambulance": "108",
+      "fire": "101",
+      "women_helpline": "1091",
+      "tourist_police_amritsar": "0183-2223538"
+    }
+  },
+  "guardian_content": {
+    "dos": [
+      "Cover your head with a scarf or bandana before entering any Gurudwara (Sikh temple); it is a mandatory sign of respect.",
+      "Wash your hands and feet (at the provided water troughs) before stepping onto the marble floor of the Golden Temple.",
+      "Accept 'Karah Parshad' (sanctified halwa) with both hands cupped together.",
+      "Greet locals with 'Sat Sri Akal' (God is Truth), which is the most respected greeting among the Sikh community.",
+      "Try 'Langar' (community kitchen) at the Golden Temple; it is free for everyone, but ensure you sit on the floor and finish everything on your plate."
+    ],
+    "donts": [
+      "Do NOT smoke, consume alcohol, or use tobacco products near any Gurudwara or religious site; it is strictly prohibited and offensive.",
+      "Do not point your feet toward the Guru Granth Sahib (Holy Book) or any religious shrine.",
+      "Avoid wearing shorts or sleeveless tops when visiting religious places; keep legs and shoulders fully covered.",
+      "Do not take photographs inside the inner sanctum of the Golden Temple (Harmandir Sahib); photography is usually only allowed in the outer walkway (Prakarma).",
+      "Avoid entering restricted border zones near the Wagah-Attari border without following official gate timings and security protocols."
+    ],
+    "local_phrases": {
+      "language": "Punjabi",
+      "phrases": [
+        { "english": "Hello / Greetings", "local": "Sat Sri Akal (ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ)" },
+        { "english": "Thank you", "local": "Dhanvaad (ਧੰਨਵਾਦ)" },
+        { "english": "How are you?", "local": "Ki haal hai? (ਕੀ ਹਾਲ ਹੈ?)" },
+        { "english": "Where is the Golden Temple?", "local": "Darbar Sahib kithay hai?" },
+        { "english": "Help!", "local": "Meri madad karo!" }
+      ]
+    },
+    "critical_alerts": [
+      "Border Security: The Wagah Border ceremony is highly crowded. Reach at least 2 hours early and carry your passport as ID for the foreign tourist gallery.",
+      "Agricultural Alert: During the stubble-burning seasons (Oct-Nov and April-May), air quality can drop significantly; carry an N95 mask if you are asthmatic.",
+      "Drug Awareness: While Punjab is a land of milk and honey, it has specific regions with drug-related sensitivities. Avoid isolated border-area villages after dark."
+    ]
+  }
+},
+{
+  "state_metadata": {
+    "name": "Delhi (NCT)",
+    "capital": "New Delhi",
+    "primary_language": "Hindi / English / Punjabi",
+    "tourist_police": true,
+    "emergency_contacts": {
+      "integrated_emergency": "112",
+      "police": "100",
+      "ambulance": "102 / 108",
+      "women_helpline": "181 / 1091",
+      "tourist_helpline": "1363 (Toll-free 24/7)",
+      "dmrc_metro_helpline": "155370"
+    }
+  },
+  "guardian_content": {
+    "dos": [
+      "Use the Delhi Metro for inter-city travel; it is safe, air-conditioned, and features a dedicated 'Ladies Coach' at one end of every train.",
+      "Check the Air Quality Index (AQI) daily via apps like IQAir; wear an N95 mask if the AQI exceeds 200.",
+      "Use app-based ride-hailing services like Uber or Ola for all road travel to ensure GPS tracking and fixed pricing.",
+      "Dress modestly, especially when visiting Old Delhi or religious sites like Jama Masjid or Akshardham (cover shoulders and knees).",
+      "Eat at high-turnover stalls or reputable chains like Haldiram’s or Bikanervala to minimize the risk of 'Delhi Belly'."
+    ],
+    "donts": [
+      "Do NOT trust strangers at New Delhi Railway Station who claim the 'Foreign Tourist Office' has moved or is closed; the official office is at 88 Janpath.",
+      "Avoid walking alone in isolated areas after dark, especially in poorly lit parts of Old Delhi or Paharganj.",
+      "Do not accept unsolicited help from people offering to take you to 'Government Emporiums' or 'Cheap Travel Agents'.",
+      "Avoid drinking tap water or consuming drinks with ice from street vendors; stick to sealed bottled water.",
+      "Do not display large amounts of cash or expensive jewelry in crowded markets like Sarojini Nagar or Chandni Chowk."
+    ],
+    "local_phrases": {
+      "language": "Hindi",
+      "phrases": [
+        { "english": "Hello / Respectful Greeting", "local": "Namaste (नमस्ते)" },
+        { "english": "How much is the fare?", "local": "Kitna paise hua? (कितना पैसे हुआ?)" },
+        { "english": "I don't want a guide.", "local": "Mujhe guide nahi chahiye" },
+        { "english": "Please help me.", "local": "Kripya meri madad kijiye (कृपया मेरी मदद कीजिये)" },
+        { "english": "Where is the Metro station?", "local": "Metro station kahan hai?" }
+      ]
+    },
+    "critical_alerts": [
+      "The 'Hotel Closed' Scam: Taxis or autos may claim your hotel is in a 'protest zone' or 'burned down' to take you to a commission-paying alternative. Insist on your destination.",
+      "Pollution Alert (2026): Delhi experiences severe smog from November to February. N95/N99 masks are mandatory for outdoor activities during 'Severe' AQI days.",
+      "Food Safety: Avoid pre-cut fruits or salads from street vendors as they are often washed in non-potable tap water.",
+      "Metro Safety: Be vigilant against pickpockets in crowded interchange stations like Rajiv Chowk or Kashmere Gate."
+    ]
+  }
+},
+{
+  "state_metadata": {
+    "name": "Telangana",
+    "capital": "Hyderabad",
+    "primary_language": "Telugu / Urdu / Hindi",
+    "tourist_police": true,
+    "emergency_contacts": {
+      "integrated_emergency": "112",
+      "police": "100",
+      "ambulance": "108",
+      "fire": "101",
+      "women_helpline": "181 / 1091",
+      "cyber_crime": "1930",
+      "she_teams_whatsapp": "+91 9490616555"
+    }
+  },
+  "guardian_content": {
+    "dos": [
+      "Greet with 'Namaskaram' (Telugu) or 'Salaam' (Urdu/Hindi); both are widely used in Hyderabad's multicultural landscape.",
+      "Use the 'SHE Teams' services; Telangana has a dedicated wing for women's safety that is highly responsive to harassment complaints.",
+      "Dress modestly when visiting the Charminar area or religious sites like the Mecca Masjid (cover shoulders and knees).",
+      "Try the Hyderabadi Biryani at established restaurants like Paradise, Bawarchi, or Shadab to ensure hygiene and authenticity.",
+      "Use the 'L&T Metro' for traversing the city; it features 24/7 CCTV monitoring and dedicated security staff."
+    ],
+    "donts": [
+      "Do NOT accept rides from random people at the airport or stations; only go to the designated Ola/Uber zones or prepaid taxi counters.",
+      "Avoid clicking on unknown links or scanning QR codes sent by strangers for 'discounts'; Hyderabad is a prime target for UPI scams.",
+      "Do not smoke or consume alcohol in public; strict fines apply, especially in family-heavy areas like the Hussain Sagar lakefront.",
+      "Avoid carrying large amounts of cash in crowded markets like Laad Bazaar (near Charminar); keep wallets and phones in front pockets.",
+      "Do not point your feet toward people or religious symbols, as this is considered highly disrespectful in local culture."
+    ],
+    "local_phrases": {
+      "language": "Telugu",
+      "phrases": [
+        { "english": "Hello / Greetings", "local": "Namaskaram (నమస్కారం)" },
+        { "english": "Thank you", "local": "Dhanyavadhalu (ధన్యవాదాలు)" },
+        { "english": "How much is this?", "local": "Idhi entha? (ఇది ఎంత?)" },
+        { "english": "Where is the bathroom?", "local": "Bathroom ekkada? (బాత్‌రూమ్ ఎక్కడ?)" },
+        { "english": "Help!", "local": "Sahayam! (సహాయం!) / Rakshinchandi!" }
+      ]
+    },
+    "critical_alerts": [
+      "Taxi Scam Alert: Beware of drivers at the airport claiming your 'OTP' isn't working to lure you into an offline ride where they can overcharge you.",
+      "Cyber Alert (2026): Be wary of 'Courier Fraud'—scammers calling about a package with illegal items in your name. Real police never ask for money over the phone.",
+      "Weather Alert: Heavy rainfall during the monsoon (July–Sept) can lead to rapid waterlogging in parts of Hyderabad; track weather alerts via the GHMC app."
+    ]
+  }
+}
+]
