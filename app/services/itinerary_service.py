@@ -1,36 +1,34 @@
 import json
-import re
 import pandas as pd
 from app.config.gemini_config import model
 
 
 class ItineraryService:
-    
+
     # Load crime dataset once at module startup
     crime_df = pd.read_csv('app/dataset/crime.csv')
 
     def get_crime_data_for_location(self, district, state):
         """
         Filter crime data by district and state.
-        
+
         Args:
             district (str): District/City name (e.g., 'Lucknow')
             state (str): State name (e.g., 'Uttar Pradesh')
-        
+
         Returns:
             list: Filtered crime records as dicts, or empty list if no match
         """
         filtered = self.crime_df[
-            (self.crime_df['District'].str.lower() == district.lower()) & 
-            (self.crime_df['State'].str.lower() == state.lower())
+            (self.crime_df['District'].str.lower() == district.lower()) & (self.crime_df['State'].str.lower() == state.lower())
         ]
-        
+
         if filtered.empty:
             return []
-        
+
         # Convert to list of dicts and include summary stats
         records = filtered.to_dict('records')
-        
+
         # Calculate summary for the AI
         summary = {
             "location": f"{district}, {state}",
@@ -39,9 +37,8 @@ class ItineraryService:
             "avg_crime_rate_per_100k": round(filtered['Crime_Rate_per_100k'].mean(), 2),
             "detailed_records": records
         }
-        
-        return summary
 
+        return summary
 
     def generate_safe_itinerary(self, city, state, days, people, style, start_date, budget):
         """
@@ -57,16 +54,16 @@ class ItineraryService:
 
         # 1. Fetch and structure the Crime Data
         crime_data = self.get_crime_data_for_location(city, state)
-        
+
         if not crime_data:
             return {"error": f"No crime data found for {city}, {state}. Please check the spelling."}
-        
+
         crime_context = f"Safety Report for {city}, {state}:\n{json.dumps(crime_data, indent=2)}"
 
         # 2. Build the detailed Prompt
         prompt = f"""
         Create a highly personalized and SAFE travel itinerary for {city}, {state}.
-        
+
         USER PROFILE:
         - Group Size: {people} people
         - Duration: {days} days
@@ -78,7 +75,7 @@ class ItineraryService:
         {crime_context}
 
         STRICT INSTRUCTIONS:
-        1. Cross-reference every location with the Safety Report. 
+        1. Cross-reference every location with the Safety Report.
         2. If an area has high crime rates, avoid it or schedule it only during the safest hours.
         3. Include Latitude and Longitude for every suggested stop.
         4. Provide a 'Safety Rationale' for every activity (Explain why it is safe for this specific group).
@@ -115,10 +112,10 @@ class ItineraryService:
         try:
             # 3. Call Gemini
             response = model.generate_content(prompt)
-            
+
             # 4. Extract and Parse the JSON
             itinerary_data = json.loads(response.text)
-            
+
             return itinerary_data
 
         except Exception as e:
