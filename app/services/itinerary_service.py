@@ -41,6 +41,8 @@ class ItineraryService:
         }
         
         return summary
+
+
     def generate_safe_itinerary(self, city, state, days, people, style, start_date, budget):
         """
         Args:
