@@ -1,12 +1,10 @@
 import json
 import os
 
+
 class GuardianService:
     def __init__(self):
-        current_dir = os.path.dirname(os.path.abspath(__file__))
-        file_path = os.path.join(current_dir, "..", "dataset", "guardian_card.txt")
-        
-        file_path = os.path.abspath(file_path)
+        file_path = 'app/dataset/guardian_card.txt'
 
         if not os.path.exists(file_path):
             raise FileNotFoundError(f"Could not find file at {file_path}")
@@ -25,7 +23,7 @@ class GuardianService:
             # Check for "state" key
             if 'state' in entry and entry['state'].lower() == search_state:
                 return self._format_response(entry)
-            
+
             # Check for "state_metadata" -> "name" key
             if 'state_metadata' in entry and entry['state_metadata']['name'].lower() == search_state:
                 return self._format_response(entry)
@@ -39,11 +37,11 @@ class GuardianService:
         """
         # Extract Content (handles different naming in your JSON)
         content = entry.get('guardian_content') or entry.get('guardian_info')
-        
+
         # Extract Metadata
         metadata = entry.get('state_metadata', {})
         state_name = metadata.get('name') or entry.get('state')
-        
+
         # Extract Phrases (handles local_phrases vs useful_phrases)
         phrases = content.get('local_phrases') or content.get('useful_phrases')
 
