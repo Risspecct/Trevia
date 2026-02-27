@@ -267,7 +267,7 @@ const Planner = () => {
         }}
       />
 
-      <header className="relative z-10 flex items-center justify-between px-6 py-4 border-b border-border backdrop-blur-sm">
+      <header className="relative z-10 flex items-center justify-between px-6 py-4 border-b border-border">
         <TreviaLogo />
         <ThemeToggle />
       </header>

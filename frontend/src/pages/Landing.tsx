@@ -321,7 +321,7 @@ const Landing = () => {
       <CitySkyline />
 
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-end px-8 py-5 backdrop-blur-md" style={{ background: "rgba(18,14,10,0.6)" }}>
+      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-end px-8 py-5" style={{ background: "rgba(18,14,10,0.85)" }}>
         <div className="flex items-center gap-6">
           <span className="text-xs font-medium tracking-widest uppercase" style={{ color: "rgba(212,175,55,0.6)" }}>
             Tourism Intelligence

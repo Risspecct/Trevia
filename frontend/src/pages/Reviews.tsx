@@ -127,7 +127,7 @@ const Reviews = () => {
         style={{ background: "radial-gradient(circle, rgba(214,186,158,0.12), transparent 70%)" }}
       />
 
-      <header className="relative z-10 flex items-center justify-between px-6 py-4 border-b border-border backdrop-blur-sm">
+      <header className="relative z-10 flex items-center justify-between px-6 py-4 border-b border-border">
         <TreviaLogo />
         <ThemeToggle />
       </header>
