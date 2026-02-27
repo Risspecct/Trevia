@@ -1,10 +1,12 @@
-import { Home, LayoutDashboard, MapPinCheck, CalendarDays, Bus, Eye } from "lucide-react";
+import { Home, LayoutDashboard, MapPinCheck, CalendarDays, Bus, Eye, MessageSquareQuote, ShieldCheck } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const dockItems = [
   { icon: Home, label: "Home", path: "/" },
   { icon: LayoutDashboard, label: "Dashboard", path: "/dashboard" },
   { icon: MapPinCheck, label: "Place Analysis", path: "/place-analysis" },
+  { icon: MessageSquareQuote, label: "Reviews", path: "/reviews" },
+  { icon: ShieldCheck, label: "Guardian", path: "/guardian" },
   { icon: CalendarDays, label: "Planner", path: "/planner" },
   { icon: Bus, label: "Transport", path: "/transport" },
   { icon: Eye, label: "Insights", path: "/insights" },

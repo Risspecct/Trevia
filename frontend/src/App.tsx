@@ -9,6 +9,8 @@ import Planner from "./pages/Planner";
 import Transport from "./pages/Transport";
 import Insights from "./pages/Insights";
 import PlaceAnalysis from "./pages/PlaceAnalysis";
+import Reviews from "./pages/Reviews";
+import GuardianCard from "./pages/GuardianCard";
 import NotFound from "./pages/NotFound";
 import Dock from "./components/Dock";
 
@@ -26,6 +28,8 @@ const AppContent = () => {
         <Route path="/" element={<Landing />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/place-analysis" element={<PlaceAnalysis />} />
+        <Route path="/reviews" element={<Reviews />} />
+        <Route path="/guardian" element={<GuardianCard />} />
         <Route path="/planner" element={<Planner />} />
         <Route path="/transport" element={<Transport />} />
         <Route path="/insights" element={<Insights />} />

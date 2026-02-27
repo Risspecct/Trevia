@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
+import { useNavigate } from "react-router-dom";
 import {
   Search,
   MapPin,
   Building2,
   Landmark,
   ShieldAlert,
+  ShieldCheck,
   ThumbsUp,
   ThumbsDown,
   Clock,
@@ -65,6 +67,7 @@ const riskBg = (level: string) => {
 };
 
 const PlaceAnalysis = () => {
+  const navigate = useNavigate();
   const [placeName, setPlaceName] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
@@ -423,6 +426,19 @@ const PlaceAnalysis = () => {
               </div>
             </div>
           </MagicBento>
+
+          {/* Guardian Angel CTA */}
+          {state.trim() && (
+            <div className="result-card flex justify-center">
+              <button
+                onClick={() => navigate(`/guardian?state=${encodeURIComponent(state.trim())}`)}
+                className="group flex items-center gap-3 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-semibold text-sm tracking-wide hover-lift gold-glow transition-all duration-300"
+              >
+                <ShieldCheck className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                Guardian Angel — Safety Card for {state.trim()}
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>

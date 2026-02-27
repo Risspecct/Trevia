@@ -137,6 +137,16 @@ const MagicBento = ({
         duration: 0.3,
         ease: "power2.out",
       });
+      // Glow pulse on hover
+      gsap.fromTo(
+        cardRef.current,
+        { boxShadow: `0 0 0px rgba(${glowColor}, 0)` },
+        {
+          boxShadow: `0 0 24px rgba(${glowColor}, 0.35), 0 0 60px rgba(${glowColor}, 0.15)`,
+          duration: 0.5,
+          ease: "power2.out",
+        }
+      );
     }
   };
 
@@ -150,6 +160,7 @@ const MagicBento = ({
       rotateY: 0,
       x: 0,
       y: 0,
+      boxShadow: `0 0 0px rgba(${glowColor}, 0)`,
       duration: 0.5,
       ease: "power2.out",
     });
@@ -159,14 +170,10 @@ const MagicBento = ({
     }
   };
 
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!clickEffect || !cardRef.current || disableAnimations) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    // Ripple burst
-    for (let i = 0; i < 8; i++) {
+  // Shared ripple-burst used by both click and mouse-move
+  const spawnRipple = (x: number, y: number, count = 8) => {
+    if (!cardRef.current) return;
+    for (let i = 0; i < count; i++) {
       const particle = document.createElement("div");
       particle.style.cssText = `
         position: absolute;
@@ -182,7 +189,7 @@ const MagicBento = ({
       `;
       cardRef.current.appendChild(particle);
 
-      const angle = (i / 8) * Math.PI * 2;
+      const angle = (i / count) * Math.PI * 2;
       const distance = 40 + Math.random() * 60;
       gsap.to(particle, {
         x: Math.cos(angle) * distance,
@@ -194,6 +201,15 @@ const MagicBento = ({
         onComplete: () => particle.remove(),
       });
     }
+  };
+
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!clickEffect || !cardRef.current || disableAnimations) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    spawnRipple(x, y, 8);
 
     // Flash pulse
     gsap.fromTo(
