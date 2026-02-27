@@ -1,33 +1,35 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException
 from app.models.itinerary import ItineraryRequest
 from app.services.itinerary_service import ItineraryService
 
-router = APIRouter(prefix="/itinerary", tags=["Itinerary"])
+router = APIRouter(
+    prefix="/itinerary",
+    tags=["Safe Itinerary"]
+)
 
-
-# Dependency to get the service instance
-def get_itinerary_service():
-    return ItineraryService()
+service = ItineraryService()
 
 
 @router.post("/generate")
-async def handle_itinerary_request(
-    request: ItineraryRequest,
-    service: ItineraryService = Depends(get_itinerary_service)
-):
+async def generate_itinerary(request: ItineraryRequest):
     """
-    Endpoint that triggers the initial itinerary workflow.
+    Generate AI-powered safe itinerary based on crime analytics.
     """
-    try:
-        # Convert the Pydantic model to a dictionary to match service expectations
-        # .model_dump() is preferred for Pydantic v2
-        input_data = request.model_dump()
 
-        # Await the async process_request function in your service file
-        result = await service.process_request(input_data)
+    result = service.generate_safe_itinerary(
+        city=request.city,
+        state=request.state,
+        days=request.duration_days,
+        people=request.num_people,
+        style=request.travel_style,
+        start_date=request.start_date,
+        budget=request.budget_level
+    )
 
-        return result
+    if "error" in result:
+        raise HTTPException(status_code=400, detail=result["error"])
 
-    except Exception as e:
-
-        raise HTTPException(status_code=500, detail=f"Router Processing Error: {str(e)}")
+    return {
+        "status": "success",
+        "data": result
+    }
