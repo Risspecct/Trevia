@@ -3,3 +3,4 @@ dotenv
 pandas
 fastapi[standard]
 serpapi
+vadersentiment
