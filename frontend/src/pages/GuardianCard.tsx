@@ -136,7 +136,7 @@ const ContactCard = ({ contact, index, copiedNum, onCopy }: { contact: Emergency
   const color = CONTACT_COLORS[index % CONTACT_COLORS.length];
   const priority = Math.max(100 - index * 10, 50);
   return (
-    <MagicBento enableStars={false} enableSpotlight enableBorderGlow clickEffect spotlightRadius={300} particleCount={0} glowColor="70, 124, 87" className="rounded-2xl">
+    <MagicBento enableStars={false} enableSpotlight enableBorderGlow clickEffect spotlightRadius={300} particleCount={0} glowColor="184, 134, 11" className="rounded-2xl">
       <div className="glass-card gold-border rounded-2xl p-5 h-full cursor-pointer group relative transition-colors hover:border-primary/40" onClick={() => onCopy(contact.number)}>
         <div className="flex items-start justify-between mb-3">
           <div className={`w-9 h-9 rounded-full flex items-center justify-center bg-card ${color.phone}`}>
@@ -250,7 +250,7 @@ const GuardianCard = () => {
   return (
     <div className="min-h-screen pb-24 relative overflow-hidden">
       <ParticleCanvas particleCount={70} starCount={40} />
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full pointer-events-none z-0" style={{ background: "radial-gradient(circle, rgba(86,138,102,0.06), transparent 70%)" }} />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full pointer-events-none z-0" style={{ background: "radial-gradient(circle, rgba(184,134,11,0.06), transparent 70%)" }} />
 
       <header className="relative z-10 flex items-center justify-between px-6 py-4 border-b border-border">
         <TreviaLogo />
@@ -263,7 +263,7 @@ const GuardianCard = () => {
           <p className="text-muted-foreground text-sm max-w-lg mx-auto">Your offline-ready safety card with emergency contacts, do&apos;s &amp; don&apos;ts, local phrases, and critical alerts for any Indian state.</p>
         </div>
 
-        <MagicBento textAutoHide enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={400} particleCount={12} glowColor="70, 124, 87" className="rounded-2xl">
+        <MagicBento textAutoHide enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={400} particleCount={12} glowColor="184, 134, 11" className="rounded-2xl">
           <div className="glass-card gold-border p-6 rounded-2xl space-y-4">
             <div className="space-y-2">
               <label className="flex items-center gap-2 text-sm font-semibold text-foreground"><ShieldCheck className="w-4 h-4 text-primary" /> Select State</label>

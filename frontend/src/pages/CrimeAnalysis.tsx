@@ -155,6 +155,7 @@ const CrimeAnalysis = () => {
       }
       const json = await res.json();
       setData(json.data);
+      setShowDropdown(false);
     } catch (e: any) {
       setError(e.message || "Something went wrong");
     } finally {
@@ -206,7 +207,7 @@ const CrimeAnalysis = () => {
       <ParticleCanvas particleCount={60} starCount={35} />
       <div
         className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full blur-[180px] pointer-events-none z-0"
-        style={{ background: "radial-gradient(circle, rgba(86,138,102,0.10), transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, rgba(184,134,11,0.10), transparent 70%)" }}
       />
 
       {/* Header */}
@@ -215,8 +216,18 @@ const CrimeAnalysis = () => {
         <ThemeToggle />
       </header>
 
+      {/* Title */}
+      <div className="relative z-10 max-w-3xl mx-auto mt-10 px-4 text-center">
+        <h1 className="text-2xl md:text-3xl font-bold text-foreground">
+          Crime Analysis Dashboard
+        </h1>
+        <p className="mt-2 text-muted-foreground text-sm md:text-base">
+          Search for a city above to view real-time crime analytics, risk assessment, hotspot mapping, and AI-powered safety directives.
+        </p>
+      </div>
+
       {/* Search bar */}
-      <div className="relative z-10 max-w-xl mx-auto mt-8 px-4" ref={dropdownRef}>
+      <div className="relative z-10 max-w-xl mx-auto mt-6 px-4" ref={dropdownRef}>
         <div className="relative">
           <div className="glass-card gold-border flex items-center rounded-2xl overflow-hidden">
             <Search className="w-5 h-5 ml-4 text-muted-foreground flex-shrink-0" />
@@ -245,7 +256,7 @@ const CrimeAnalysis = () => {
 
           {/* Suggestions dropdown */}
           {showDropdown && suggestions.length > 0 && (
-            <div className="absolute top-full mt-2 left-0 right-0 glass-card gold-border rounded-xl overflow-hidden z-50 max-h-72 overflow-y-auto shadow-xl">
+            <div className="mt-2 glass-card gold-border rounded-xl overflow-hidden max-h-72 overflow-y-auto shadow-xl custom-scrollbar">
               {suggestions.map((s, i) => (
                 <button
                   key={`${s.state}-${s.district}-${i}`}
@@ -295,7 +306,7 @@ const CrimeAnalysis = () => {
           {/* ── Row 1: Stat cards ─────────────────────────── */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Total Reported Incidents */}
-            <MagicBento glowColor="70, 124, 87" enableBorderGlow clickEffect className="anim-card rounded-2xl">
+            <MagicBento glowColor="184, 134, 11" enableBorderGlow clickEffect className="anim-card rounded-2xl">
               <div className="glass-card gold-border p-6 rounded-2xl">
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-sm text-muted-foreground font-medium">Total Reported Incidents</span>
@@ -309,7 +320,7 @@ const CrimeAnalysis = () => {
             </MagicBento>
 
             {/* Crime Risk Index */}
-            <MagicBento glowColor="70, 124, 87" enableBorderGlow clickEffect className="anim-card rounded-2xl">
+            <MagicBento glowColor="184, 134, 11" enableBorderGlow clickEffect className="anim-card rounded-2xl">
               <div className="glass-card gold-border p-6 rounded-2xl">
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-sm text-muted-foreground font-medium">Crime Risk Index</span>
@@ -331,7 +342,7 @@ const CrimeAnalysis = () => {
             </MagicBento>
 
             {/* Overall Safety Score */}
-            <MagicBento glowColor="70, 124, 87" enableBorderGlow clickEffect className="anim-card rounded-2xl">
+            <MagicBento glowColor="184, 134, 11" enableBorderGlow clickEffect className="anim-card rounded-2xl">
               <div className="glass-card gold-border p-6 rounded-2xl">
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-sm text-muted-foreground font-medium">Overall Safety Score</span>
@@ -356,7 +367,7 @@ const CrimeAnalysis = () => {
           {/* ── Row 2: Charts ─────────────────────────────── */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {/* Crime Category Distribution */}
-            <MagicBento glowColor="70, 124, 87" enableBorderGlow clickEffect className="anim-card rounded-2xl">
+            <MagicBento glowColor="184, 134, 11" enableBorderGlow clickEffect className="anim-card rounded-2xl">
               <div className="glass-card gold-border p-6 rounded-2xl">
                 <h3 className="flex items-center gap-2 text-lg font-bold text-foreground mb-6">
                   <Activity className="w-5 h-5 text-primary" />
@@ -380,7 +391,7 @@ const CrimeAnalysis = () => {
                       <Bar
                         dataKey="cases"
                         radius={[6, 6, 0, 0]}
-                        fill="rgba(86,138,102,0.5)"
+                        fill="rgba(184,134,11,0.5)"
                       />
                     </BarChart>
                   </ResponsiveContainer>
@@ -389,7 +400,7 @@ const CrimeAnalysis = () => {
             </MagicBento>
 
             {/* Crime Trend (Year) */}
-            <MagicBento glowColor="70, 124, 87" enableBorderGlow clickEffect className="anim-card rounded-2xl">
+            <MagicBento glowColor="184, 134, 11" enableBorderGlow clickEffect className="anim-card rounded-2xl">
               <div className="glass-card gold-border p-6 rounded-2xl">
                 <h3 className="flex items-center gap-2 text-lg font-bold text-foreground mb-6">
                   <TrendingUp className="w-5 h-5 text-primary" />
@@ -398,7 +409,7 @@ const CrimeAnalysis = () => {
                 <div className="h-[280px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={data.year_trend}>
-                      <CartesianGrid stroke="rgba(124,144,130,0.1)" />
+                      <CartesianGrid stroke="rgba(184,134,11,0.1)" />
                       <XAxis
                         dataKey="year"
                         tick={{ fill: "hsl(var(--muted-foreground))", fontSize: 11 }}
@@ -429,7 +440,7 @@ const CrimeAnalysis = () => {
           {/* ── Row 3: Heatmap + AI Directive ─────────────── */}
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
             {/* Heatmap by Time of Day */}
-            <MagicBento glowColor="70, 124, 87" enableBorderGlow clickEffect className="anim-card rounded-2xl lg:col-span-3">
+            <MagicBento glowColor="184, 134, 11" enableBorderGlow clickEffect className="anim-card rounded-2xl lg:col-span-3">
               <div className="glass-card gold-border p-6 rounded-2xl">
                 <h3 className="flex items-center gap-2 text-lg font-bold text-foreground mb-6">
                   <Clock className="w-5 h-5 text-primary" />
@@ -462,7 +473,7 @@ const CrimeAnalysis = () => {
             </MagicBento>
 
             {/* AI Safety Directive */}
-            <MagicBento glowColor="70, 124, 87" enableBorderGlow clickEffect className="anim-card rounded-2xl lg:col-span-2">
+            <MagicBento glowColor="184, 134, 11" enableBorderGlow clickEffect className="anim-card rounded-2xl lg:col-span-2">
               <div className="glass-card gold-border p-6 rounded-2xl flex flex-col justify-between h-full min-h-[340px]">
                 <div>
                   <h3 className="flex items-center gap-2 text-lg font-bold mb-6">
@@ -484,7 +495,7 @@ const CrimeAnalysis = () => {
           </div>
 
           {/* ── Row 4: Incident Hotspots ──────────────────── */}
-          <MagicBento glowColor="70, 124, 87" enableBorderGlow clickEffect className="anim-card rounded-2xl">
+          <MagicBento glowColor="184, 134, 11" enableBorderGlow clickEffect className="anim-card rounded-2xl">
             <div className="glass-card gold-border p-6 rounded-2xl">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Left: hotspot list */}
@@ -590,18 +601,6 @@ const CrimeAnalysis = () => {
         </div>
       )}
 
-      {/* Empty state */}
-      {!data && !loading && !error && (
-        <div className="relative z-10 flex flex-col items-center justify-center mt-24 gap-4 text-center px-4">
-          <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center">
-            <AlertTriangle className="w-10 h-10 text-primary" />
-          </div>
-          <h3 className="text-xl font-bold text-foreground">Crime Analysis Dashboard</h3>
-          <p className="text-muted-foreground text-sm max-w-md">
-            Search for a city above to view real-time crime analytics, risk assessment, hotspot mapping, and AI-powered safety directives.
-          </p>
-        </div>
-      )}
     </div>
   );
 };

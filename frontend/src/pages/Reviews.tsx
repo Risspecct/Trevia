@@ -124,7 +124,7 @@ const Reviews = () => {
 
       <div
         className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full blur-[180px] pointer-events-none z-0"
-        style={{ background: "radial-gradient(circle, rgba(86,138,102,0.12), transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, rgba(184,134,11,0.12), transparent 70%)" }}
       />
 
       <header className="relative z-10 flex items-center justify-between px-6 py-4 border-b border-border">
@@ -143,7 +143,7 @@ const Reviews = () => {
           </p>
         </div>
 
-        <MagicBento textAutoHide enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={400} particleCount={12} glowColor="70, 124, 87" className="form-section rounded-2xl">
+        <MagicBento textAutoHide enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={400} particleCount={12} glowColor="184, 134, 11" className="form-section rounded-2xl">
           <div className="glass-card gold-border p-6 rounded-2xl space-y-4">
             <div className="space-y-2">
               <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
@@ -183,7 +183,7 @@ const Reviews = () => {
       {result && (
         <div ref={resultRef} className="relative z-10 max-w-4xl mx-auto px-6 pb-12 space-y-6">
           {/* Place header */}
-          <MagicBento textAutoHide enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={500} particleCount={14} glowColor="70, 124, 87" className="result-card rounded-2xl">
+          <MagicBento textAutoHide enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={500} particleCount={14} glowColor="184, 134, 11" className="result-card rounded-2xl">
             <div className="glass-card gold-border p-6 rounded-2xl text-center space-y-2">
               <h3 className="text-2xl md:text-3xl font-display font-bold text-foreground flex items-center justify-center gap-3">
                 <MessageSquareQuote className="w-7 h-7 text-primary" />

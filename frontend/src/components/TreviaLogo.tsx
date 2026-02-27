@@ -6,7 +6,7 @@ const TreviaLogo = ({ className = "" }: { className?: string }) => (
   <h1
     className={`text-lg font-bold font-display tracking-[0.25em] select-none ${className}`}
     style={{
-      background: "linear-gradient(135deg, #467c57 0%, #7c9082 45%, #568a66 100%)",
+      background: "linear-gradient(135deg, #a67c00 0%, #c8a848 45%, #b8860b 100%)",
       WebkitBackgroundClip: "text",
       WebkitTextFillColor: "transparent",
       backgroundClip: "text",

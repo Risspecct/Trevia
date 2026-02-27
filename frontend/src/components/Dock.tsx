@@ -17,7 +17,7 @@ const Dock = () => {
 
   return (
     <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[9999]">
-      <div className="glass-card gold-border flex items-center gap-1 px-3 py-2 rounded-2xl shadow-lg" style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.15), 0 0 0 1px rgba(124,144,130,0.15)" }}>
+      <div className="glass-card gold-border flex items-center gap-1 px-3 py-2 rounded-2xl shadow-lg" style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.15), 0 0 0 1px rgba(184,134,11,0.15)" }}>
         {dockItems.map((item) => {
           const isActive = location.pathname === item.path;
           return (

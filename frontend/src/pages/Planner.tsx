@@ -246,7 +246,7 @@ const Planner = () => {
       : [];
 
   const dayColors = [
-    "#568a66",
+    "#b8860b",
     "#60a5fa",
     "#34d399",
     "#f472b6",
@@ -263,7 +263,7 @@ const Planner = () => {
         className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full blur-[180px] pointer-events-none z-0"
         style={{
           background:
-            "radial-gradient(circle, rgba(86,138,102,0.12), transparent 70%)",
+            "radial-gradient(circle, rgba(184,134,11,0.12), transparent 70%)",
         }}
       />
 
@@ -284,7 +284,7 @@ const Planner = () => {
         </div>
 
         {/* City & State */}
-        <MagicBento textAutoHide enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={400} particleCount={12} glowColor="70, 124, 87" className="form-section rounded-2xl">
+        <MagicBento textAutoHide enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={400} particleCount={12} glowColor="184, 134, 11" className="form-section rounded-2xl">
           <div className="glass-card gold-border p-6 rounded-2xl space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
@@ -307,7 +307,7 @@ const Planner = () => {
 
         {/* Days, People, Start Date */}
         <div className="form-section grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <MagicBento textAutoHide enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={300} particleCount={8} glowColor="70, 124, 87" className="rounded-2xl">
+          <MagicBento textAutoHide enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={300} particleCount={8} glowColor="184, 134, 11" className="rounded-2xl">
             <div className="glass-card gold-border p-5 rounded-2xl space-y-2 h-full">
               <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
                 <CalendarDays className="w-4 h-4 text-primary" /> Days
@@ -316,7 +316,7 @@ const Planner = () => {
                 className="w-full glass-card gold-border px-4 py-3 rounded-xl text-sm bg-card text-foreground outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/30 transition-all" />
             </div>
           </MagicBento>
-          <MagicBento textAutoHide enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={300} particleCount={8} glowColor="70, 124, 87" className="rounded-2xl">
+          <MagicBento textAutoHide enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={300} particleCount={8} glowColor="184, 134, 11" className="rounded-2xl">
             <div className="glass-card gold-border p-5 rounded-2xl space-y-2 h-full">
               <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
                 <Users className="w-4 h-4 text-primary" /> People
@@ -325,7 +325,7 @@ const Planner = () => {
                 className="w-full glass-card gold-border px-4 py-3 rounded-xl text-sm bg-card text-foreground outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/30 transition-all" />
             </div>
           </MagicBento>
-          <MagicBento textAutoHide enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={300} particleCount={8} glowColor="70, 124, 87" className="rounded-2xl">
+          <MagicBento textAutoHide enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={300} particleCount={8} glowColor="184, 134, 11" className="rounded-2xl">
             <div className="glass-card gold-border p-5 rounded-2xl space-y-2 h-full">
               <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
                 <CalendarDays className="w-4 h-4 text-primary" /> Start Date
@@ -337,7 +337,7 @@ const Planner = () => {
         </div>
 
         {/* Travel Style */}
-        <MagicBento textAutoHide enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={400} particleCount={12} glowColor="70, 124, 87" className="form-section rounded-2xl">
+        <MagicBento textAutoHide enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={400} particleCount={12} glowColor="184, 134, 11" className="form-section rounded-2xl">
           <div className="glass-card gold-border p-6 rounded-2xl space-y-4">
             <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
               <Compass className="w-4 h-4 text-primary" /> Travel Style
@@ -358,7 +358,7 @@ const Planner = () => {
         </MagicBento>
 
         {/* Budget */}
-        <MagicBento textAutoHide enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={400} particleCount={10} glowColor="70, 124, 87" className="form-section rounded-2xl">
+        <MagicBento textAutoHide enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={400} particleCount={10} glowColor="184, 134, 11" className="form-section rounded-2xl">
           <div className="glass-card gold-border p-6 rounded-2xl space-y-4">
             <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
               <Wallet className="w-4 h-4 text-primary" /> Budget
@@ -399,7 +399,7 @@ const Planner = () => {
         <div ref={resultRef} className="relative z-10 max-w-5xl mx-auto px-6 pb-16 space-y-6">
 
           {/* Trip Summary + Safety Score */}
-          <MagicBento textAutoHide enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={500} particleCount={14} glowColor="70, 124, 87" className="result-card rounded-2xl">
+          <MagicBento textAutoHide enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={500} particleCount={14} glowColor="184, 134, 11" className="result-card rounded-2xl">
             <div className="glass-card gold-border p-6 rounded-2xl space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <h3 className="text-2xl font-display font-bold text-foreground">Trip Overview</h3>
@@ -425,7 +425,7 @@ const Planner = () => {
 
           {/* Map */}
           <div className="result-card">
-            <MagicBento textAutoHide enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={500} particleCount={10} glowColor="70, 124, 87" className="rounded-2xl">
+            <MagicBento textAutoHide enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={500} particleCount={10} glowColor="184, 134, 11" className="rounded-2xl">
               <div className="glass-card gold-border rounded-2xl overflow-hidden">
                 <div className="flex items-center justify-between px-5 py-3 border-b border-border">
                   <h4 className="text-sm font-semibold text-foreground flex items-center gap-2">
@@ -501,7 +501,7 @@ const Planner = () => {
           {/* Daily Itinerary */}
           {result.daily_itinerary.map((dayPlan) => (
             <div key={dayPlan.day} className="result-card">
-              <MagicBento textAutoHide enableBorderGlow clickEffect glowColor={dayColors[(dayPlan.day - 1) % dayColors.length].replace("#", "").match(/.{2}/g)?.map((h) => parseInt(h, 16)).join(", ") || "70, 124, 87"} className="rounded-2xl">
+              <MagicBento textAutoHide enableBorderGlow clickEffect glowColor={dayColors[(dayPlan.day - 1) % dayColors.length].replace("#", "").match(/.{2}/g)?.map((h) => parseInt(h, 16)).join(", ") || "184, 134, 11"} className="rounded-2xl">
                 <div className="glass-card gold-border rounded-2xl overflow-hidden">
                   {/* Day Header */}
                   <button onClick={() => toggleDay(dayPlan.day)}
