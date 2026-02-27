@@ -192,6 +192,14 @@ const GuardianCard = () => {
   const printRef = useRef<HTMLDivElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
 
+  // Preload speech synthesis voices (required by some browsers)
+  useEffect(() => {
+    const loadVoices = () => window.speechSynthesis.getVoices();
+    loadVoices();
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+    return () => { window.speechSynthesis.onvoiceschanged = null; };
+  }, []);
+
   useEffect(() => { if (prefilledState) fetchGuardian(prefilledState); }, []);
 
   const fetchGuardian = async (state: string) => {
@@ -214,7 +222,22 @@ const GuardianCard = () => {
 
   const copyNumber = (num: string) => { navigator.clipboard.writeText(num); setCopiedNum(num); setTimeout(() => setCopiedNum(null), 1500); };
 
-  const speak = (text: string) => { const u = new SpeechSynthesisUtterance(text); u.rate = 0.85; window.speechSynthesis.cancel(); window.speechSynthesis.speak(u); };
+  const speak = (text: string, lang?: string) => {
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.rate = 0.8;
+    u.pitch = 1.05;
+    // Try to pick a voice matching the region / Hindi / English-IN
+    const voices = window.speechSynthesis.getVoices();
+    const preferred = lang || "hi-IN";
+    const match = voices.find((v) => v.lang === preferred) ||
+                  voices.find((v) => v.lang.startsWith(preferred.split("-")[0])) ||
+                  voices.find((v) => v.lang === "en-IN") ||
+                  voices.find((v) => v.lang.startsWith("en"));
+    if (match) u.voice = match;
+    u.lang = preferred;
+    window.speechSynthesis.speak(u);
+  };
 
   const handlePrint = () => {
     if (!printRef.current) return;
@@ -236,7 +259,7 @@ const GuardianCard = () => {
 
       <div className="relative z-10 max-w-3xl mx-auto p-6 space-y-8">
         <div className="text-center space-y-3 pt-6">
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">Guardian <span className="gold-text">Angel</span></h2>
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground"><span className="gold-text">Guardian</span> Card</h2>
           <p className="text-muted-foreground text-sm max-w-lg mx-auto">Your offline-ready safety card with emergency contacts, do&apos;s &amp; don&apos;ts, local phrases, and critical alerts for any Indian state.</p>
         </div>
 
