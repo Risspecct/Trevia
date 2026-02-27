@@ -353,7 +353,7 @@ const Landing = () => {
         </p>
 
         <button
-          onClick={() => navigate("/dashboard")}
+          onClick={() => navigate("/planner")}
           onMouseEnter={() => setBtnHovered(true)}
           onMouseLeave={() => setBtnHovered(false)}
           className="hero-el mt-12 group relative flex items-center gap-3 px-10 py-5 rounded-full font-bold text-sm tracking-widest uppercase overflow-hidden transition-all duration-500"

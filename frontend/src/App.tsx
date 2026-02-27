@@ -4,13 +4,12 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Landing from "./pages/Landing";
-import Dashboard from "./pages/Dashboard";
 import Planner from "./pages/Planner";
 import Transport from "./pages/Transport";
-import Insights from "./pages/Insights";
 import PlaceAnalysis from "./pages/PlaceAnalysis";
 import Reviews from "./pages/Reviews";
 import GuardianCard from "./pages/GuardianCard";
+import CrimeAnalysis from "./pages/CrimeAnalysis";
 import NotFound from "./pages/NotFound";
 import Dock from "./components/Dock";
 
@@ -26,13 +25,12 @@ const AppContent = () => {
       <Sonner />
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/place-analysis" element={<PlaceAnalysis />} />
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/guardian" element={<GuardianCard />} />
         <Route path="/planner" element={<Planner />} />
         <Route path="/transport" element={<Transport />} />
-        <Route path="/insights" element={<Insights />} />
+        <Route path="/crime-analysis" element={<CrimeAnalysis />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       {showDock && <Dock />}
