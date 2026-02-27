@@ -564,54 +564,54 @@
 },
 {
   "state_metadata": {
-    "name": "Punjab",
+    "name": "Haryana",
     "capital": "Chandigarh",
-    "primary_language": "Punjabi",
+    "primary_language": "Haryanvi / Hindi",
     "tourist_police": true,
     "emergency_contacts": {
       "integrated_emergency": "112",
       "police": "100",
-      "ambulance": "108",
+      "ambulance": "102 / 108",
       "fire": "101",
       "women_helpline": "1091",
-      "tourist_police_amritsar": "0183-2223538"
+      "women_safety_app": "Durga Shakti App"
     }
   },
   "guardian_content": {
     "dos": [
-      "Cover your head with a scarf or bandana before entering any Gurudwara (Sikh temple); it is a mandatory sign of respect.",
-      "Wash your hands and feet (at the provided water troughs) before stepping onto the marble floor of the Golden Temple.",
-      "Accept 'Karah Parshad' (sanctified halwa) with both hands cupped together.",
-      "Greet locals with 'Sat Sri Akal' (God is Truth), which is the most respected greeting among the Sikh community.",
-      "Try 'Langar' (community kitchen) at the Golden Temple; it is free for everyone, but ensure you sit on the floor and finish everything on your plate."
+      "Greet elders with 'Ram Ram' or 'Namaste'; Haryanvi culture deeply respects age and seniority.",
+      "Expect 'Directness': Haryanvi people are known for being blunt and loud. Don't mistake this for anger; it is often just a cultural communication style.",
+      "Try 'Hookah' hospitality: In rural areas, you might be offered a seat near a Hookah (communal water pipe). While you don't have to smoke, accepting a seat is a sign of respect.",
+      "Dress modestly in villages and religious sites like Kurukshetra; avoid shorts or sleeveless tops.",
+      "Sample local dairy: Haryana is famous for its 'Doodh-Dahi' (milk and yogurt) culture. Try fresh 'Lassi' or 'Choorma' in rural homestays."
     ],
     "donts": [
-      "Do NOT smoke, consume alcohol, or use tobacco products near any Gurudwara or religious site; it is strictly prohibited and offensive.",
-      "Do not point your feet toward the Guru Granth Sahib (Holy Book) or any religious shrine.",
-      "Avoid wearing shorts or sleeveless tops when visiting religious places; keep legs and shoulders fully covered.",
-      "Do not take photographs inside the inner sanctum of the Golden Temple (Harmandir Sahib); photography is usually only allowed in the outer walkway (Prakarma).",
-      "Avoid entering restricted border zones near the Wagah-Attari border without following official gate timings and security protocols."
+      "Do NOT travel alone in remote rural areas or on highways (like NH-44) after dark; stick to well-lit urban corridors.",
+      "Avoid public displays of affection (PDA), which are strictly frowned upon in this traditionally conservative state.",
+      "Do not take photos of women or local residents without asking; privacy and personal space are highly valued.",
+      "Avoid discussing sensitive local issues like land disputes or community-specific politics in public gatherings.",
+      "Do not ignore the 'No Smoking/Alcohol' rules near religious sites like the Brahma Sarovar in Kurukshetra."
     ],
     "local_phrases": {
-      "language": "Punjabi",
+      "language": "Haryanvi",
       "phrases": [
-        { "english": "Hello / Greetings", "local": "Sat Sri Akal (ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ)" },
-        { "english": "Thank you", "local": "Dhanvaad (ਧੰਨਵਾਦ)" },
-        { "english": "How are you?", "local": "Ki haal hai? (ਕੀ ਹਾਲ ਹੈ?)" },
-        { "english": "Where is the Golden Temple?", "local": "Darbar Sahib kithay hai?" },
-        { "english": "Help!", "local": "Meri madad karo!" }
+        { "english": "Hello / Respectful Greeting", "local": "Ram Ram (राम राम)" },
+        { "english": "How are you?", "local": "Ke haal-chaal hain? (के हालचाल हैं?)" },
+        { "english": "Where is the hotel?", "local": "Hotel kith hai? (होटल ड़कत है?)" },
+        { "english": "What is the cost of this?", "local": "Yo kitne ka sai? (यो कितने का सै?)" },
+        { "english": "I need a doctor.", "local": "Mane doctor ki jarurat sai (मन्ने डॉक्टर की जरूरत सै)" }
       ]
     },
     "critical_alerts": [
-      "Border Security: The Wagah Border ceremony is highly crowded. Reach at least 2 hours early and carry your passport as ID for the foreign tourist gallery.",
-      "Agricultural Alert: During the stubble-burning seasons (Oct-Nov and April-May), air quality can drop significantly; carry an N95 mask if you are asthmatic.",
-      "Drug Awareness: While Punjab is a land of milk and honey, it has specific regions with drug-related sensitivities. Avoid isolated border-area villages after dark."
+      "Cyber Alert (2026): Gurugram is a major target for 'Work from Home' and 'Utility Bill' scams. Never share OTPs or download screen-sharing apps like AnyDesk.",
+      "Visa Scam Alert (Feb 2026): The 'Visa Fraud Se Bache' campaign is currently active in Ambala, Karnal, and Kurukshetra to combat fraudulent travel agents.",
+      "Highway Safety: High-speed traffic and stray cattle on the Delhi-Chandigarh highway (NH-44) make night driving extremely dangerous."
     ]
   }
 },
 {
   "state_metadata": {
-    "name": "Delhi (NCT)",
+    "name": "Delhi",
     "capital": "New Delhi",
     "primary_language": "Hindi / English / Punjabi",
     "tourist_police": true,
