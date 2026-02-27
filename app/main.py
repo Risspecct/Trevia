@@ -5,6 +5,8 @@ from app.routers import place_analysis_router
 from app.routers.review_router import router as review_router
 from app.routers.guardian_router import router as guardian_router
 from app.routers.crime_analysis_router import router as crime_router
+from app.routers.translator_router import router as translator_router
+from app.routers.tts_router import router as tts_router
 import uvicorn
 
 
@@ -37,6 +39,12 @@ app.include_router(guardian_router)
 
 # Include the Crime Analysis Router
 app.include_router(crime_router)
+
+# Include the Translator Router
+app.include_router(translator_router)
+
+# Include the Text-to-Speech Router
+app.include_router(tts_router)
 
 
 @app.get("/", tags=["Health Check"])
