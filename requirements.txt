@@ -4,3 +4,5 @@ pandas
 fastapi[standard]
 serpapi
 vadersentiment
+google-cloud-texttospeech
+google-cloud-translate
