@@ -1,48 +1,49 @@
 [{
-  "state": "Goa",
-  "guardian_info": {
+  "state_metadata": {
+    "name": "Goa",
+    "capital": "Panaji",
+    "primary_language": "Konkani / English / Hindi",
+    "tourist_police": true,
+    "emergency_contacts": {
+      "integrated_emergency": "112",
+      "police": "100",
+      "ambulance": "108",
+      "fire": "101",
+      "women_helpline": "1091",
+      "tourist_helpline": "1363",
+      "coastal_police_helpline": "1093"
+    }
+  },
+  "guardian_content": {
     "dos": [
-      "Carry your passport and valid visa at all times for check-ins and law enforcement.",
-      "Respect dress codes in religious places by covering shoulders and knees.",
-      "Only exchange currency at authorized banks or money changers and insist on a receipt.",
-      "Listen to lifeguards and swim only in designated safe zones between checkered flags.",
-      "Remove footwear before entering temples, mosques, or local homes."
+      "Hire only 'Yellow-Black' taxis or use the 'GoaMiles' app for transparent pricing; avoid private vehicles offering taxi services.",
+      "Carry a valid International Driving Permit (IDP) and your original license if you plan to rent a scooter or car.",
+      "Follow lifeguard instructions strictly; only swim between the 'Red and Yellow' flags during daylight hours.",
+      "Dress modestly when visiting churches (like Basilica of Bom Jesus) and temples; cover shoulders and knees.",
+      "Apply and reapply waterproof sunscreen; the Goan sun is deceptively strong even on cloudy days."
     ],
     "donts": [
-      "Do not consume alcohol or drugs on any beaches; it is a punishable offense.",
-      "Do not take photographs of military sites, government buildings, or sensitive religious rituals without permission.",
-      "Do not encourage beggars or buy products made from rare/endangered animals.",
-      "Do not accept food or drinks from strangers or enter the water after sunset.",
-      "Do not wear revealing clothing outside of pool areas or beaches."
+      "Do NOT consume alcohol or smoke on beaches; it is a punishable offense with heavy fines and potential arrest.",
+      "Avoid walking alone on isolated beaches (like Anjuna or Vagator cliffs) late at night.",
+      "Do not buy, carry, or consume illegal drugs; Goa has a 'Zero Tolerance' policy, and drug offenses carry mandatory long-term prison sentences.",
+      "Avoid taking photos of people without their consent, especially at beaches or during local festivals.",
+      "Do not leave your belongings unattended on the beach while swimming; petty theft is common in high-traffic areas."
     ],
-    "useful_phrases": {
-      "language": "Konkani/Hindi",
+    "local_phrases": {
+      "language": "Konkani",
       "phrases": [
-        { "english": "Hello", "local": "Namaste / Namaskar" },
-        { "english": "Thank you", "local": "Dhanyabaad / Shukriya" },
-        { "english": "How much does this cost?", "local": "Kitna hai? (Hindi)" },
-        { "english": "Please help me", "local": "Madad kijiye" },
-        { "english": "Call the police", "local": "Police ko bulaiye" },
-        { "english": "I need a doctor", "local": "Mujhe doctor ki zaroorat hai" }
+        { "english": "Hello", "local": "Dev boren koru (देव बरें करूं)" },
+        { "english": "Thank you", "local": "Dev borem korum" },
+        { "english": "How much?", "local": "Kitle? (कितलें?)" },
+        { "english": "Where is the beach?", "local": "Wello khuim asa?" },
+        { "english": "Help!", "local": "Majat kara!" }
       ]
     },
-    "tourist_essentials": {
-      "emergency_numbers": {
-        "police": "100",
-        "ambulance": "108",
-        "tourist_helpline": "1800-111-363"
-      },
-      "common_scams": [
-        "Taxi Mafia: Drivers quoting inflated rates or claiming hotels are closed.",
-        "The 'Flower' or 'Bracelet' gift scam: Strangers offering 'gifts' then demanding payment.",
-        "Fake Guides: Individuals offering tours at low costs who are not government-certified."
-      ],
-      "health_safety": [
-        "Drink only bottled or filtered water; avoid ice in drinks from street stalls.",
-        "Use ride-hailing apps like Uber or Ola for transparent pricing.",
-        "Ensure vaccinations (Hepatitis A, Typhoid) are up to date."
-      ]
-    }
+    "critical_alerts": [
+      "Scooter Rental Scam: Before renting, take a video of the entire vehicle. Scammers often claim old scratches are new to extort 'repair' money from tourists.",
+      "Sea Safety: Never enter the water after consuming alcohol. Most drowning cases in Goa involve intoxicated tourists and strong undercurrents.",
+      "Taxi Pricing: Goa does not use meters for street taxis. Always negotiate and fix the price *before* starting the journey if not using an app."
+    ]
   }
 },
 {
