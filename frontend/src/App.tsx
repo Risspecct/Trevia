@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import Planner from "./pages/Planner";
 import Transport from "./pages/Transport";
 import Insights from "./pages/Insights";
+import PlaceAnalysis from "./pages/PlaceAnalysis";
 import NotFound from "./pages/NotFound";
 import Dock from "./components/Dock";
 
@@ -24,6 +25,7 @@ const AppContent = () => {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/place-analysis" element={<PlaceAnalysis />} />
         <Route path="/planner" element={<Planner />} />
         <Route path="/transport" element={<Transport />} />
         <Route path="/insights" element={<Insights />} />
