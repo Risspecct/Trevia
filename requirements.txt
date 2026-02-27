@@ -1,2 +1,4 @@
 google-generativeai
 dotenv
+pandas
+fastapi[standard]

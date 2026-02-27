@@ -1,51 +1,70 @@
 import json
 import re
+import pandas as pd
 from app.config.gemini_config import model
 
 
 class ItineraryService:
-    async def process_request(self, data: dict):
-        """
-        Orchestrates the workflow: Logs the request, fetches context, 
-        and triggers the safe itinerary generation.
-        """
-        print(f"Workflow Triggered: Generating {data['duration_days']} day trip for {data['city']}")
+    
+    # Load crime dataset once at module startup
+    crime_df = pd.read_csv('app/dataset/crime.csv')
 
-        # 1. Provide Context (Mocked for now, integrate your dataset here)
-        mock_crime_data = {
-            "top_crimes": "Pickpocketing, Tourist Scams",
-            "risky_areas": "Sectors with poorly lit alleyways at night",
-            "safety_index": 70
+    def get_crime_data_for_location(self, district, state):
+        """
+        Filter crime data by district and state.
+        
+        Args:
+            district (str): District/City name (e.g., 'Lucknow')
+            state (str): State name (e.g., 'Uttar Pradesh')
+        
+        Returns:
+            list: Filtered crime records as dicts, or empty list if no match
+        """
+        filtered = self.crime_df[
+            (self.crime_df['District'].str.lower() == district.lower()) & 
+            (self.crime_df['State'].str.lower() == state.lower())
+        ]
+        
+        if filtered.empty:
+            return []
+        
+        # Convert to list of dicts and include summary stats
+        records = filtered.to_dict('records')
+        
+        # Calculate summary for the AI
+        summary = {
+            "location": f"{district}, {state}",
+            "years_covered": sorted(filtered['Year'].unique().tolist()),
+            "crime_types": filtered['Crime_Type'].unique().tolist(),
+            "avg_crime_rate_per_100k": round(filtered['Crime_Rate_per_100k'].mean(), 2),
+            "detailed_records": records
         }
-
-        # 2. Trigger the generation
-        itinerary = await self.generate_safe_itinerary(
-            city=data['city'],
-            days=data['duration_days'],
-            people=data['num_people'],
-            style=data['travel_style'],
-            start_date=data['start_date'],
-            budget=data['budget_level'],
-            crime_data=mock_crime_data
-        )
-
-        return {
-            "status": "success",
-            "message": f"Safe itinerary for {data['city']} generated.",
-            "data": itinerary
-        }
-
-    async def generate_safe_itinerary(self, city, days, people, style, start_date, budget, crime_data):
+        
+        return summary
+    def generate_safe_itinerary(self, city, state, days, people, style, start_date, budget):
         """
-        Core logic to communicate with Gemini and enforce safety constraints.
+        Args:
+            city (str): Destination city/district
+            state (str): State name
+            days (int): Number of days
+            people (int): Number of travelers
+            style (str): Travel style (e.g., Adventure, Family, Solo)
+            start_date (str): Starting date
+            budget (str): Budget level (Budget, Mid-Range, Luxury)
         """
-        # Structure the context
-        crime_context = f"Safety Report for {city}: {json.dumps(crime_data)}"
 
-        # Build the Prompt
+        # 1. Fetch and structure the Crime Data
+        crime_data = self.get_crime_data_for_location(city, state)
+        
+        if not crime_data:
+            return {"error": f"No crime data found for {city}, {state}. Please check the spelling."}
+        
+        crime_context = f"Safety Report for {city}, {state}:\n{json.dumps(crime_data, indent=2)}"
+
+        # 2. Build the detailed Prompt
         prompt = f"""
-        Create a highly personalized and SAFE travel itinerary for {city}.
-
+        Create a highly personalized and SAFE travel itinerary for {city}, {state}.
+        
         USER PROFILE:
         - Group Size: {people} people
         - Duration: {days} days
@@ -57,16 +76,16 @@ class ItineraryService:
         {crime_context}
 
         STRICT INSTRUCTIONS:
-        1. Cross-reference every location with the Safety Report.
+        1. Cross-reference every location with the Safety Report. 
         2. If an area has high crime rates, avoid it or schedule it only during the safest hours.
         3. Include Latitude and Longitude for every suggested stop.
-        4. Provide a 'Safety Rationale' for every activity.
+        4. Provide a 'Safety Rationale' for every activity (Explain why it is safe for this specific group).
         5. Suggest the safest neighborhood for accommodation.
 
         RESPONSE STRUCTURE (Must be valid JSON):
         {{
-            "trip_summary": "string",
-            "recommended_safe_neighborhood_for_stay": "string",
+            "trip_summary": "Short overview of the trip's safety strategy",
+            "recommended_safe_neighborhood_for_stay": "Name",
             "overall_safety_score": 1-10,
             "daily_itinerary": [
                 {{
@@ -74,42 +93,38 @@ class ItineraryService:
                     "activities": [
                         {{
                             "time": "HH:MM",
-                            "place_name": "string",
+                            "place_name": "Name",
                             "latitude": float,
                             "longitude": float,
-                            "description": "string",
-                            "safety_rationale": "string",
-                            "estimated_cost": "string"
+                            "description": "What to do",
+                            "safety_rationale": "Why this place was chosen based on crime data",
+                            "estimated_cost": "amount in local currency"
                         }}
                     ]
                 }}
             ],
             "emergency_info": {{
-                "nearest_hospital_area": "string",
-                "emergency_numbers": "string"
+                "nearest_hospital_area": "Name",
+                "emergency_numbers": "Local police/medical"
             }}
         }}
         """
 
         try:
-            # Call Gemini
-            # If the SDK version is synchronous, it's fine as is; if it supports async, await it.
+            # 3. Call Gemini
             response = model.generate_content(prompt)
             
-            # Clean up Markdown formatting (```json ... ```) if Gemini adds it
-            clean_text = self._clean_json_response(response.text)
-            itinerary_data = json.loads(clean_text)
-
+            # 4. Extract and Parse the JSON
+            itinerary_data = json.loads(response.text)
+            
             return itinerary_data
 
         except Exception as e:
             print(f"Error generating itinerary: {e}")
             return {"error": "Failed to generate itinerary. Please check API keys or Crime Data format."}
 
-    def _clean_json_response(self, text: str) -> str:
-        """
-        Removes Markdown code blocks and extra whitespace to ensure json.loads works.
-        """
-        # Remove ```json and ```
-        text = re.sub(r'```json\s*|\s*```', '', text)
-        return text.strip()
+
+if __name__ == "__main__":
+    service = ItineraryService()
+    result = service.generate_safe_itinerary("Lucknow", "Uttar Pradesh", 3, 2, "Solo Traveler", "2024-12-01", "Budget")
+    print(result)
