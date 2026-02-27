@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers.itinerary_router import router as itinerary_router
+from app.routers import place_analysis_router
 import uvicorn
 
 
@@ -21,6 +22,9 @@ app.add_middleware(
 
 # Include the Itinerary Router
 app.include_router(itinerary_router)
+
+# Include the Place Analysis Router
+app.include_router(place_analysis_router.router)
 
 @app.get("/", tags=["Health Check"])
 async def root():
