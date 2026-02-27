@@ -3,12 +3,13 @@ from datetime import datetime
 
 
 class ItineraryRequest(BaseModel):
-    city: str = Field(..., json_schema_extra={"example": "Varanasi"})
-    duration_days: int = Field(..., gt=0, le=7, json_schema_extra={"example": 3})
-    num_people: int = Field(..., gt=0, json_schema_extra={"example": 2})
-    travel_style: str = Field(..., json_schema_extra={"example": "Adventure"})
-    start_date: str = Field(..., json_schema_extra={"example": "2026-03-20"})
-    budget_level: str = Field(..., json_schema_extra={"example": "Mid-range"})
+    city: str = Field(..., example="Varanasi")
+    state: str = Field(..., example="Uttar Pradesh")  # <-- REQUIRED
+    duration_days: int = Field(..., gt=0, le=7, example=3)
+    num_people: int = Field(..., gt=0, example=2)
+    travel_style: str = Field(..., example="Adventure")
+    start_date: str = Field(..., example="2026-03-20")
+    budget_level: str = Field(..., example="Mid-range")
 
     @field_validator('start_date')
     @classmethod
