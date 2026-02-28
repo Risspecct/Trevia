@@ -1,130 +1,163 @@
-# TREVIA - Premium Tourism Intelligence Platform
+# 🗺️ TREVIA – Premium Tourism Intelligence Platform
 
-**TREVIA** is an advanced, AI-powered Tourism Intelligence Platform designed to provide real-time safety analytics, intelligent travel itineraries, and location-specific guardian insights. Built with a modern, responsive UI and a robust Python backend, TREVIA ensures travelers make informed, data-driven decisions.
+![React](https://img.shields.io/badge/Frontend-React_18-61DAFB?logo=react\&logoColor=white)
+![Vite](https://img.shields.io/badge/Build-Vite-646CFF?logo=vite\&logoColor=white)
+![TypeScript](https://img.shields.io/badge/Language-TypeScript-3178C6?logo=typescript\&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Styling-TailwindCSS-38B2AC?logo=tailwind-css\&logoColor=white)
+![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688?logo=fastapi\&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python\&logoColor=white)
+![Google Gemini](https://img.shields.io/badge/AI-Gemini_2.0_Flash-4285F4?logo=google\&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green)
 
----
+TREVIA is an advanced, AI-powered **Tourism Intelligence Platform** designed to provide real-time safety analytics, intelligent travel itineraries, and location-specific guardian insights.
 
-## Core Features
+Built for modern travelers, it combines deep data analysis with generative AI to ensure every journey is safe, informed, and culturally enriched.
 
-- **Crime Analysis Engine:** Real-time visualization of incident hotspots, 6-month crime trends, and time-of-day risk heatmaps.
-- **AI-Powered Itinerary Generator:** Creates personalized, safety-aware travel plans based on local crime data and user preferences.
-- **State Guardian Cards:** Delivers essential safety "Do's & Don'ts", emergency contacts, and critical local alerts tailored to specific states.
-- **Smart Place Analysis:** Evaluates specific locations by cross-referencing local crime data to provide pros, cons, and safety warnings.
-- **Review Intelligence:** Analyzes Google Maps reviews using Sentiment Analysis to extract the most accurate "Best" and "Worst" experiences.
-- **Real-Time Translation & TTS:** Built-in multi-language translation and Text-To-Speech (TTS) to bridge communication gaps for tourists.
-
----
-
-## App Flow (Summarised)
-
-1. **User Input & Parameters:** The user inputs their destination, travel duration, budget, and group style into the React frontend via the interactive Dashboard suite.
-2. **Data Aggregation (Backend):** The FastAPI backend intercepts the requests and queries regional safety parameters from the local `crime.csv` dataset, Google Maps review sentiment via SerpAPI, and localized cultural parameters from `guardian_card.txt`.
-3. **AI Synthesization (Gemini):** This highly contextualized data is fed directly into Google Gemini Flash. The AI synthesizes personalized, dynamically safe itineraries, analyzing and routing tourists away from high-risk hotspot areas.
-4. **Interactive Visualization:** The React frontend dynamically renders structured intelligence. Incident hotspots are plotted onto interactive radar map components, and crime trend tracking is visualized seamlessly using Recharts.
-5. **Real-time Accessibility:** Users interact with the localized Guardian modules to quickly access local phrases and play back AI voice translations utilizing Google Cloud TTS and Translation capabilities.
+🔗 **Live Application:** [https://trevia-zeta.vercel.app](https://trevia-zeta.vercel.app)
 
 ---
 
-## Architecture & Technology Stack
+## 🌟 Core Features
 
-TREVIA is built on a decoupled architecture featuring a seamless React frontend and a FastAPI backend.
+### 🛡️ Crime Analysis Engine
+
+* Real-time visualization of incident hotspots
+* 6-month crime trend analytics
+* Regional dataset-driven risk assessment before travel
+
+### 🤖 AI-Powered Itinerary Generator
+
+* Personalized travel plans
+* Safety-aware routing using local crime insights
+* Powered by Gemini 2.0 Flash
+
+### 🎴 State Guardian Cards
+
+* Safety “Do’s & Don’ts”
+* Emergency contacts
+* Local cultural intelligence for Indian states
+
+### 📊 Review Intelligence
+
+* Sentiment analysis of Google Maps reviews
+* Extracts objective “Best” and “Worst” user experiences
+* Landmark-level intelligence insights
+
+### 🗣️ Real-Time Translation & TTS
+
+* Multi-language translation
+* Text-To-Speech for instant communication bridging
+
+### 🚗 Transport Route Intelligence
+
+* Real-time comparison:
+
+  * Driving
+  * Transit
+  * Walking
+  * Cycling
+* Deep-link integration with ride-sharing services (Uber/Ola)
+
+---
+
+## 🛠 Technology Stack
 
 ### Frontend
-- **Framework:** React 18, Vite
-- **Styling:** Tailwind CSS, Shadcn-UI, Framer Motion, GSAP
-- **Data Visualization:** Recharts, custom SVG nodes
-- **Routing:** React Router v6
-- **Language:** TypeScript
+
+* **Framework:** React 18 with Vite
+* **Styling:** Tailwind CSS, Shadcn-UI
+* **Animations:** Framer Motion
+* **Visualization:** Leaflet (OpenStreetMap), Recharts
+* **Language:** TypeScript
 
 ### Backend
-- **Framework:** FastAPI (Python 3.11)
-- **AI Integration:** Google Generative AI (Gemini 2.0 Flash)
-- **Data Processing:** Pandas 
-- **Sentiment Analysis:** VADER Sentiment (vaderSentiment)
-- **External Services:** SerpAPI (Google Maps Reviews), Google Cloud Translation API, Google Cloud Text-To-Speech API
+
+* **Framework:** FastAPI (Python 3.11)
+* **AI Orchestration:** Google Generative AI (Gemini 2.0 Flash API)
+* **Data Science:** Pandas, VADER Sentiment Analysis
+* **Third-Party APIs:**
+
+  * SerpAPI (Google Maps Intelligence)
+  * Google Cloud Translation
+  * Google Cloud Text-To-Speech
 
 ---
 
-## 📁 Repository Structure
+## 📁 Project Structure
 
-```text
-risspecct-trevia/
-├── app/                        # FastAPI Backend Application
-│   ├── config/                 # AI & Environment Configurations
-│   ├── core/                   # Core utilities (Logging)
-│   ├── dataset/                # Local data files (crime.csv, guardian_card.txt)
-│   ├── models/                 # Pydantic validation models
-│   ├── routers/                # API Endpoints (Crime, Itinerary, Guardian, etc.)
-│   └── services/               # Business logic & AI integrations
-├── frontend/                   # React Frontend Application
+```bash
+Trevia/
+├── app/                        # FastAPI Backend logic
+│   ├── config/                 # Gemini & AI engine settings
+│   ├── dataset/                # Regional Crime CSVs & Guardian text data
+│   ├── models/                 # Pydantic Schemas for data validation
+│   ├── routers/                # Modular API Endpoints (Itinerary, Transport, etc.)
+│   └── services/               # Core business logic & AI integration layers
+├── frontend/                   # React + TypeScript Web App
 │   ├── src/
-│   │   ├── components/         # Reusable UI components & Layouts (Dock, Bento)
-│   │   ├── components/ui/      # Shadcn-UI design system components
-│   │   ├── data/               # Mock data and constants
-│   │   ├── hooks/              # Custom React hooks
-│   │   ├── lib/                # Utility functions
-│   │   └── pages/              # Application views (Dashboard, CrimeAnalysis, etc.)
-│   └── vite.config.ts          # Vite bundler configuration
-├── requirements.txt            # Python dependencies
-└── Dockerfile                  # Containerization setup
+│   │   ├── components/         # Reusable UI (Bento Grids, Interactive Maps)
+│   │   ├── pages/              # Module-specific views (Dashboard, Planner)
+│   │   └── test/               # Vitest unit testing suite
+└── city_pairs.json             # Pre-mapped route intelligence data
 ```
 
 ---
 
-##  Local Development Setup
+## ⚙️ Local Development Setup
 
-### 1. Backend Setup
-
-Ensure you have Python 3.11+ installed.
+### 1️⃣ Backend Setup
 
 ```bash
-# Navigate to the root folder
-cd risspecct-trevia
-
-# Install required Python packages
+cd Trevia
 pip install -r requirements.txt
-
-# Create a .env file based on the example
-cp .env.example .env
-
-# Start the FastAPI server
-uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
 ```
-*Note: Make sure to fill in your API keys in the `.env` file for Gemini, SerpAPI, and GCP services.*
 
-### 2. Frontend Setup
+Create a `.env` file in the root directory:
 
-Ensure you have Node.js and npm installed.
+```env
+GEMINI_API_KEY=your_key_here
+SERP_API_KEY=your_key_here
+```
+
+Run the backend server:
 
 ```bash
-# Navigate to the frontend folder
-cd risspecct-trevia/frontend
+uvicorn app.main:app --reload
+```
 
-# Install node modules
+---
+
+### 2️⃣ Frontend Setup
+
+```bash
+cd frontend
 npm install
-
-# Start the Vite development server
 npm run dev
 ```
 
-The frontend will be available at `https://trevia-zeta.vercel.app/` (or as specified by Vite), and the API documentation (Swagger) will be accessible at `https://trevia-hrnw.onrender.com/`.
+The application will be available at:
+
+```
+http://localhost:8080/
+```
 
 ---
 
-##  Docker Deployment
+## 🎯 Hackathon Highlights
 
-TREVIA includes a multi-stage Dockerfile for optimized backend deployment.
+* ✅ Safety-Centric UX: Risk analysis integrated into the planning workflow
+* ⚡ Edge Intelligence: Gemini 2.0 Flash for ultra-low latency AI reasoning
+* 🌍 Cultural Context: Guardian Card system for respectful and informed travel
 
-```bash
-# Build the Docker image
-docker build -t trevia-backend .
+---
 
-# Run the container
-docker run -p 8000:8000 --env-file .env trevia-backend
-```
+## 🚀 Vision
 
+TREVIA redefines travel planning by merging:
 
+* Preventive intelligence
+* AI reasoning
+* Cultural awareness
+* Real-time analytics
 
-
-Copyright © 2026 TREVIA. All rights reserved. 
-Data generated by the AI models is for analytical and educational purposes. Always verify critical safety information with local authorities.
+Unlike traditional travel platforms, TREVIA prioritizes **informed safety over passive discovery**.
