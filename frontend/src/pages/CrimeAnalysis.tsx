@@ -15,6 +15,8 @@ import ThemeToggle from "@/components/ThemeToggle";
 import ParticleCanvas from "@/components/ParticleCanvas";
 import MagicBento from "@/components/MagicBento";
 import TreviaLogo from "@/components/TreviaLogo";
+import api from "@/lib/api";
+import axios from "axios";
 
 // ── Leaflet icon fix ────────────────────────────────────────
 const defaultIcon = L.icon({
@@ -102,11 +104,8 @@ const CrimeAnalysis = () => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch("http://127.0.0.1:8000/crime/cities");
-        if (res.ok) {
-          const json = await res.json();
-          setAllCities(json.data || []);
-        }
+        const res = await api.get("/crime/cities");
+        setAllCities(res.data.data || []);
       } catch {
         // Silently fail — user can still type
       } finally {
@@ -144,20 +143,15 @@ const CrimeAnalysis = () => {
     setError("");
     setData(null);
     try {
-      const res = await fetch("http://127.0.0.1:8000/crime/analyze", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ state, district, user_lat: 0, user_lng: 0 }),
-      });
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.detail || "Analysis failed");
-      }
-      const json = await res.json();
-      setData(json.data);
+      const res = await api.post("/crime/analyze", { state, district, user_lat: 0, user_lng: 0 });
+      setData(res.data.data);
       setShowDropdown(false);
-    } catch (e: any) {
-      setError(e.message || "Something went wrong");
+    } catch (e: unknown) {
+      if (axios.isAxiosError(e)) {
+        setError(e.response?.data?.detail || e.message);
+      } else {
+        setError(e instanceof Error ? e.message : "Something went wrong");
+      }
     } finally {
       setLoading(false);
     }

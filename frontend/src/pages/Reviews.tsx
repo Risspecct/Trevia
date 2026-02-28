@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import gsap from "gsap";
+import api from "@/lib/api";
 import axios from "axios";
 import {
   Search,
@@ -15,8 +16,6 @@ import ThemeToggle from "@/components/ThemeToggle";
 import ParticleCanvas from "@/components/ParticleCanvas";
 import MagicBento from "@/components/MagicBento";
 import TreviaLogo from "@/components/TreviaLogo";
-
-const API = "http://127.0.0.1:8000";
 
 /* ─── Types ─── */
 
@@ -61,7 +60,7 @@ function useAutocomplete(debounceMs = 350) {
       timerRef.current = setTimeout(async () => {
         setLoading(true);
         try {
-          const res = await axios.get(`${API}/places/autocomplete`, {
+          const res = await api.get("/places/autocomplete", {
             params: { input: value.trim() },
           });
           const list: PlaceSuggestion[] = res.data?.suggestions ?? [];
@@ -172,21 +171,14 @@ const Reviews = () => {
     setResult(null);
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/reviews/analyze", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ place_name: placeAc.query.trim() }),
-      });
-
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.detail || "Failed to fetch reviews.");
-      }
-
-      const json = await res.json();
-      setResult(json.data as ReviewData);
+      const res = await api.post("/reviews/analyze", { place_name: placeAc.query.trim() });
+      setResult(res.data.data as ReviewData);
     } catch (e: unknown) {
-      setError(e instanceof Error ? e.message : "Something went wrong.");
+      if (axios.isAxiosError(e)) {
+        setError(e.response?.data?.detail || e.message);
+      } else {
+        setError(e instanceof Error ? e.message : "Something went wrong.");
+      }
     } finally {
       setLoading(false);
     }

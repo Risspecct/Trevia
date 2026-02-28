@@ -8,6 +8,7 @@ import {
 } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import api from "@/lib/api";
 import axios from "axios";
 import {
   Car, Train, Footprints, Bike, ArrowRight,
@@ -20,8 +21,6 @@ import MagicBento from "@/components/MagicBento";
 import TreviaLogo from "@/components/TreviaLogo";
 
 /* ─── Constants ─── */
-
-const API = "http://127.0.0.1:8000";
 
 const MAP_TILE =
   "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png";
@@ -90,7 +89,7 @@ function useAutocomplete(debounceMs = 350) {
       timerRef.current = setTimeout(async () => {
         setLoading(true);
         try {
-          const res = await axios.get(`${API}/places/autocomplete`, {
+          const res = await api.get("/places/autocomplete", {
             params: { input: value.trim() },
           });
           const list: PlaceSuggestion[] = res.data?.suggestions ?? [];
@@ -218,7 +217,7 @@ const Transport = () => {
     setError("");
     setData(null);
     try {
-      const res = await axios.post(`${API}/transport/routes`, {
+      const res = await api.post("/transport/routes", {
         origin: originAc.query.trim(),
         destination: destAc.query.trim(),
       });

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
+import api from "@/lib/api";
 import axios from "axios";
 import {
   MapContainer,
@@ -79,7 +80,7 @@ interface NearbyMarker {
   place: NearbyPlace;
 }
 
-const API = "http://127.0.0.1:8000";
+
 
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
@@ -107,10 +108,8 @@ const fetchPlaceImage = async (placeName: string): Promise<string | null> => {
   try {
     const query = encodeURIComponent(placeName);
     const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${query}`;
-    const res = await fetch(url);
-    if (!res.ok) return null;
-    const data = await res.json();
-    return data.thumbnail?.source ?? data.originalimage?.source ?? null;
+    const res = await axios.get(url);
+    return res.data?.thumbnail?.source ?? res.data?.originalimage?.source ?? null;
   } catch {
     return null;
   }
@@ -244,7 +243,7 @@ const Planner = () => {
       // Fetch in parallel for all coords
       const promises = coords.map(async (c) => {
         try {
-          const res = await axios.post(`${API}/nearby/emergency`, { lat: c.lat, lng: c.lng });
+          const res = await api.post("/nearby/emergency", { lat: c.lat, lng: c.lng });
           const cats = res.data?.categories ?? {};
 
           // Hospitals
@@ -287,10 +286,7 @@ const Planner = () => {
     setPlaceImages({});
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/itinerary/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      const res = await api.post("/itinerary/generate", {
           city: city.trim(),
           state: state.trim(),
           duration_days: parseInt(days),
@@ -298,18 +294,15 @@ const Planner = () => {
           travel_style: style,
           start_date: startDate,
           budget_level: budget,
-        }),
       });
 
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.detail || "Failed to generate itinerary.");
-      }
-
-      const json = await res.json();
-      setResult(json.data as ItineraryData);
+      setResult(res.data.data as ItineraryData);
     } catch (e: unknown) {
-      setError(e instanceof Error ? e.message : "Something went wrong.");
+      if (axios.isAxiosError(e)) {
+        setError(e.response?.data?.detail || e.message);
+      } else {
+        setError(e instanceof Error ? e.message : "Something went wrong.");
+      }
     } finally {
       setLoading(false);
     }

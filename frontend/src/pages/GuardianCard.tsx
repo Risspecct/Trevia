@@ -22,6 +22,8 @@ import ParticleCanvas from "@/components/ParticleCanvas";
 import MagicBento from "@/components/MagicBento";
 import TreviaLogo from "@/components/TreviaLogo";
 import { ALL_STATES } from "@/data/indianStatesAndCities";
+import api, { API_BASE_URL } from "@/lib/api";
+import axios from "axios";
 
 interface EmergencyContact { name: string; number: string; }
 interface Phrase { english: string; local: string; pronunciation: string; }
@@ -205,11 +207,15 @@ const GuardianCard = () => {
     if (!state) return;
     setLoading(true); setError(null); setData(null);
     try {
-      const res = await fetch("http://127.0.0.1:8000/guardian/state", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ state }) });
-      if (!res.ok) { const err = await res.json(); throw new Error(err.detail || "Failed to load guardian data."); }
-      const json = await res.json();
-      setData(normalizeGuardianData(json.data));
-    } catch (e: unknown) { setError(e instanceof Error ? e.message : "Something went wrong."); }
+      const res = await api.post("/guardian/state", { state });
+      setData(normalizeGuardianData(res.data.data));
+    } catch (e: unknown) {
+      if (axios.isAxiosError(e)) {
+        setError(e.response?.data?.detail || e.message);
+      } else {
+        setError(e instanceof Error ? e.message : "Something went wrong.");
+      }
+    }
     finally { setLoading(false); }
   };
 
@@ -232,15 +238,12 @@ const GuardianCard = () => {
     setTtsLoading(idx);
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/tts/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text, language_code: lang || "hi-IN" }),
-      });
+      const res = await api.post("/tts/generate", 
+        { text, language_code: lang || "hi-IN" },
+        { responseType: "blob" }
+      );
 
-      if (!res.ok) throw new Error("TTS generation failed");
-
-      const blob = await res.blob();
+      const blob = res.data;
       const url = URL.createObjectURL(blob);
       const audio = new Audio(url);
       audioRef.current = audio;
@@ -271,14 +274,8 @@ const GuardianCard = () => {
     setTranslateLoading(true);
     setTranslatedText(null);
     try {
-      const res = await fetch("http://127.0.0.1:8000/translate/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: translateInput.trim(), target_language: targetLang }),
-      });
-      if (!res.ok) throw new Error("Translation failed");
-      const json = await res.json();
-      setTranslatedText(json.translated_text);
+      const res = await api.post("/translate/", { text: translateInput.trim(), target_language: targetLang });
+      setTranslatedText(res.data.translated_text);
     } catch {
       setTranslatedText("⚠ Translation failed. Please try again.");
     } finally {

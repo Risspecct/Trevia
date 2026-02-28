@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import gsap from "gsap";
 import { useNavigate } from "react-router-dom";
+import api from "@/lib/api";
 import axios from "axios";
 import {
   Search,
@@ -22,8 +23,6 @@ import ParticleCanvas from "@/components/ParticleCanvas";
 import MagicBento from "@/components/MagicBento";
 import TreviaLogo from "@/components/TreviaLogo";
 import { ALL_STATES, getCitiesForState } from "@/data/indianStatesAndCities";
-
-const API = "http://127.0.0.1:8000";
 
 /* ─── Place Autocomplete ─── */
 
@@ -48,7 +47,7 @@ function useAutocomplete(debounceMs = 350) {
       timerRef.current = setTimeout(async () => {
         setLoading(true);
         try {
-          const res = await axios.get(`${API}/places/autocomplete`, { params: { input: value.trim() } });
+          const res = await api.get("/places/autocomplete", { params: { input: value.trim() } });
           const list: PlaceSuggestion[] = res.data?.suggestions ?? [];
           setSuggestions(list);
           setOpen(list.length > 0);
@@ -160,25 +159,19 @@ const PlaceAnalysis = () => {
     setResult(null);
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/place/analyze", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      const res = await api.post("/place/analyze", {
           place_name: placeAc.query.trim(),
           city: city.trim(),
           state: state.trim(),
-        }),
       });
 
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.detail || "Failed to analyze the place.");
-      }
-
-      const json = await res.json();
-      setResult(json.data as PlaceData);
+      setResult(res.data.data as PlaceData);
     } catch (e: unknown) {
-      setError(e instanceof Error ? e.message : "Something went wrong.");
+      if (axios.isAxiosError(e)) {
+        setError(e.response?.data?.detail || e.message);
+      } else {
+        setError(e instanceof Error ? e.message : "Something went wrong.");
+      }
     } finally {
       setLoading(false);
     }
