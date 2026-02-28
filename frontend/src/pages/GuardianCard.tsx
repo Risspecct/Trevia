@@ -15,6 +15,7 @@ import {
   Printer,
   Languages,
   Send,
+  ArrowLeftRight,
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import ParticleCanvas from "@/components/ParticleCanvas";
@@ -90,6 +91,27 @@ const CONTACT_COLORS = [
   { phone: "text-cyan-400", bar: "bg-cyan-500" },
 ];
 
+const LANGUAGES = [
+  { code: "en", label: "English" },
+  { code: "hi", label: "Hindi" },
+  { code: "bn", label: "Bengali" },
+  { code: "ta", label: "Tamil" },
+  { code: "te", label: "Telugu" },
+  { code: "mr", label: "Marathi" },
+  { code: "gu", label: "Gujarati" },
+  { code: "kn", label: "Kannada" },
+  { code: "ml", label: "Malayalam" },
+  { code: "pa", label: "Punjabi" },
+  { code: "or", label: "Odia" },
+  { code: "ur", label: "Urdu" },
+  { code: "as", label: "Assamese" },
+  { code: "ne", label: "Nepali" },
+  { code: "sd", label: "Sindhi" },
+  { code: "ks", label: "Kashmiri" },
+  { code: "sa", label: "Sanskrit" },
+  { code: "mni", label: "Manipuri" },
+];
+
 const AlertBanner = ({ alerts }: { alerts: string[] }) => {
   const [idx, setIdx] = useState(0);
   useEffect(() => {
@@ -120,24 +142,15 @@ const AlertBanner = ({ alerts }: { alerts: string[] }) => {
 
 const ContactCard = ({ contact, index, copiedNum, onCopy }: { contact: EmergencyContact; index: number; copiedNum: string | null; onCopy: (n: string) => void }) => {
   const color = CONTACT_COLORS[index % CONTACT_COLORS.length];
-  const priority = Math.max(100 - index * 10, 50);
   return (
     <MagicBento enableStars={false} enableSpotlight enableBorderGlow clickEffect spotlightRadius={300} particleCount={0} glowColor="184, 134, 11" className="rounded-2xl">
-      <div className="glass-card gold-border rounded-2xl p-5 h-full cursor-pointer group relative transition-colors hover:border-primary/40" onClick={() => onCopy(contact.number)}>
-        <div className="flex items-start justify-between mb-3">
-          <div className={`w-9 h-9 rounded-full flex items-center justify-center bg-card ${color.phone}`}>
-            <Phone className="w-4 h-4" />
-          </div>
-          <span className="text-2xl font-mono font-bold text-foreground">{contact.number}</span>
+      <div className="glass-card gold-border rounded-2xl p-5 h-full cursor-pointer group relative transition-colors hover:border-primary/40 flex items-center gap-4" onClick={() => onCopy(contact.number)}>
+        <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 bg-card ${color.phone}`}>
+          <Phone className="w-5 h-5" />
         </div>
-        <p className="text-sm font-semibold text-foreground mb-3">{contact.name}</p>
-        <div className="space-y-1">
-          <div className="flex items-center justify-between text-xs text-muted-foreground">
-            <span>Response Priority</span><span>{priority}</span>
-          </div>
-          <div className="w-full h-1.5 rounded-full bg-muted/20 overflow-hidden">
-            <div className={`h-full rounded-full ${color.bar}`} style={{ width: `${priority}%` }} />
-          </div>
+        <div className="min-w-0 flex-1">
+          <p className="text-sm font-semibold text-foreground truncate">{contact.name}</p>
+          <span className="text-xl font-mono font-bold text-foreground">{contact.number}</span>
         </div>
         {copiedNum === contact.number && (
           <div className="absolute inset-0 rounded-2xl flex items-center justify-center bg-background/80 z-30">
@@ -180,6 +193,8 @@ const GuardianCard = () => {
   const [translateInput, setTranslateInput] = useState("");
   const [translatedText, setTranslatedText] = useState<string | null>(null);
   const [translateLoading, setTranslateLoading] = useState(false);
+  const [sourceLang, setSourceLang] = useState("en");
+  const [targetLang, setTargetLang] = useState("hi");
   const printRef = useRef<HTMLDivElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -250,7 +265,7 @@ const GuardianCard = () => {
     setTtsLoading(null);
   }, []);
 
-  /** Translate English text to Hindi via backend */
+  /** Translate text via backend Google Cloud Translate */
   const handleTranslate = useCallback(async () => {
     if (!translateInput.trim()) return;
     setTranslateLoading(true);
@@ -259,7 +274,7 @@ const GuardianCard = () => {
       const res = await fetch("http://127.0.0.1:8000/translate/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: translateInput.trim(), target_language: "hi" }),
+        body: JSON.stringify({ text: translateInput.trim(), target_language: targetLang }),
       });
       if (!res.ok) throw new Error("Translation failed");
       const json = await res.json();
@@ -269,7 +284,16 @@ const GuardianCard = () => {
     } finally {
       setTranslateLoading(false);
     }
-  }, [translateInput]);
+  }, [translateInput, targetLang]);
+
+  const swapLanguages = useCallback(() => {
+    setSourceLang(targetLang);
+    setTargetLang(sourceLang);
+    if (translatedText && !translatedText.startsWith("⚠")) {
+      setTranslateInput(translatedText);
+      setTranslatedText(null);
+    }
+  }, [sourceLang, targetLang, translatedText]);
 
   const handlePrint = () => {
     if (!printRef.current) return;
@@ -407,51 +431,106 @@ const GuardianCard = () => {
                 })}
               </div>
 
-              {/* Custom Translator */}
-              <div className="border-t border-border pt-4 mt-2 space-y-3">
+              {/* Custom Translator — Google Translate style */}
+              <div className="border-t border-border pt-4 mt-2 space-y-4">
                 <h5 className="flex items-center gap-2 text-sm font-semibold text-foreground">
                   <Languages className="w-4 h-4 text-primary" /> Custom Translator
                 </h5>
-                <p className="text-xs text-muted-foreground">Type any English phrase to translate it to Hindi.</p>
-                <div className="flex gap-2">
-                  <input
-                    type="text"
-                    value={translateInput}
-                    onChange={(e) => setTranslateInput(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && handleTranslate()}
-                    placeholder="e.g. Where is the nearest hospital?"
-                    className="flex-1 glass-card gold-border px-4 py-2.5 rounded-xl text-sm bg-card text-foreground outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/30 transition-all"
-                  />
+
+                {/* Language selector row */}
+                <div className="flex items-center gap-2">
+                  <div className="flex-1 relative">
+                    <select
+                      value={sourceLang}
+                      onChange={(e) => setSourceLang(e.target.value)}
+                      className="w-full glass-card gold-border px-4 py-2.5 rounded-xl text-sm bg-card text-foreground outline-none appearance-none cursor-pointer focus:ring-2 focus:ring-primary/30 transition-all"
+                    >
+                      {LANGUAGES.map((l) => (
+                        <option key={l.code} value={l.code}>{l.label}</option>
+                      ))}
+                    </select>
+                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground pointer-events-none" />
+                  </div>
+
+                  <button
+                    onClick={swapLanguages}
+                    className="p-2.5 rounded-xl glass-card gold-border hover:bg-primary/10 transition-all shrink-0"
+                    title="Swap languages"
+                  >
+                    <ArrowLeftRight className="w-4 h-4 text-primary" />
+                  </button>
+
+                  <div className="flex-1 relative">
+                    <select
+                      value={targetLang}
+                      onChange={(e) => setTargetLang(e.target.value)}
+                      className="w-full glass-card gold-border px-4 py-2.5 rounded-xl text-sm bg-card text-foreground outline-none appearance-none cursor-pointer focus:ring-2 focus:ring-primary/30 transition-all"
+                    >
+                      {LANGUAGES.map((l) => (
+                        <option key={l.code} value={l.code}>{l.label}</option>
+                      ))}
+                    </select>
+                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground pointer-events-none" />
+                  </div>
+                </div>
+
+                {/* Dual text panels */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {/* Source panel */}
+                  <div className="space-y-2">
+                    <label className="text-xs text-muted-foreground">{LANGUAGES.find((l) => l.code === sourceLang)?.label ?? "Source"}</label>
+                    <textarea
+                      value={translateInput}
+                      onChange={(e) => setTranslateInput(e.target.value)}
+                      onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && (e.preventDefault(), handleTranslate())}
+                      placeholder="Type something to translate..."
+                      rows={4}
+                      className="w-full glass-card gold-border px-4 py-3 rounded-xl text-sm bg-card text-foreground outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/30 transition-all resize-none"
+                    />
+                  </div>
+
+                  {/* Target panel */}
+                  <div className="space-y-2">
+                    <label className="text-xs text-muted-foreground">{LANGUAGES.find((l) => l.code === targetLang)?.label ?? "Target"}</label>
+                    <div className="w-full glass-card gold-border px-4 py-3 rounded-xl text-sm min-h-[7rem] flex items-start">
+                      {translateLoading ? (
+                        <span className="flex items-center gap-2 text-muted-foreground"><Loader2 className="w-4 h-4 animate-spin" /> Translating…</span>
+                      ) : translatedText ? (
+                        <div className="flex items-start justify-between w-full gap-2">
+                          <span className={`font-semibold leading-relaxed ${translatedText.startsWith("⚠") ? "text-red-400" : "text-primary"}`}>{translatedText}</span>
+                          {!translatedText.startsWith("⚠") && (
+                            <button
+                              onClick={() => speak(translatedText, -1)}
+                              disabled={ttsLoading === -1}
+                              className={`p-2 rounded-lg transition-all shrink-0 hover:bg-primary/10 ${speakingIdx === -1 ? "bg-blue-500/20 scale-110" : ""} disabled:opacity-50`}
+                              title="Speak translation"
+                            >
+                              {ttsLoading === -1
+                                ? <Loader2 className="w-4 h-4 text-blue-400 animate-spin" />
+                                : speakingIdx === -1
+                                  ? <VolumeX className="w-4 h-4 text-blue-400 animate-pulse" />
+                                  : <Volume2 className="w-4 h-4 text-muted-foreground hover:text-primary" />}
+                            </button>
+                          )}
+                        </div>
+                      ) : (
+                        <span className="text-muted-foreground">Translation will appear here…</span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Translate button */}
+                <div className="flex justify-end">
                   <button
                     onClick={handleTranslate}
                     disabled={translateLoading || !translateInput.trim()}
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-semibold hover-lift transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-semibold hover-lift transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {translateLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                    Translate
                   </button>
                 </div>
-                {translatedText && (
-                  <div className="glass-card gold-border rounded-xl p-4 flex items-center justify-between gap-3">
-                    <div className="min-w-0">
-                      <span className="text-xs text-muted-foreground block">Hindi Translation</span>
-                      <span className="text-sm font-semibold text-primary block">{translatedText}</span>
-                    </div>
-                    {!translatedText.startsWith("\u26a0") && (
-                      <button
-                        onClick={() => speak(translatedText, -1)}
-                        disabled={ttsLoading === -1}
-                        className={`p-2.5 rounded-xl transition-all duration-300 shrink-0 hover:bg-primary/10 ${speakingIdx === -1 ? "bg-blue-500/20 scale-110" : ""} disabled:opacity-50`}
-                        title="Speak translation"
-                      >
-                        {ttsLoading === -1
-                          ? <Loader2 className="w-4 h-4 text-blue-400 animate-spin" />
-                          : speakingIdx === -1
-                            ? <VolumeX className="w-4 h-4 text-blue-400 animate-pulse" />
-                            : <Volume2 className="w-4 h-4 text-muted-foreground hover:text-primary" />}
-                      </button>
-                    )}
-                  </div>
-                )}
               </div>
             </div>
           </MagicBento>

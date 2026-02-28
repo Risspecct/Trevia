@@ -15,6 +15,7 @@ interface MagicBentoProps {
   particleCount?: number;
   glowColor?: string;
   disableAnimations?: boolean;
+  overflowVisible?: boolean;
 }
 
 const MagicBento = ({
@@ -31,6 +32,7 @@ const MagicBento = ({
   particleCount: _particleCount = 0,
   glowColor = "184, 134, 11",
   disableAnimations = false,
+  overflowVisible = false,
 }: MagicBentoProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const borderGlowRef = useRef<HTMLDivElement>(null);
@@ -167,7 +169,7 @@ const MagicBento = ({
   return (
     <div
       ref={cardRef}
-      className={`magic-bento relative overflow-hidden ${className}`}
+      className={`magic-bento relative ${overflowVisible ? "overflow-visible" : "overflow-hidden"} ${className}`}
       style={{ perspective: "1000px", transformStyle: "preserve-3d" }}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}

@@ -280,7 +280,7 @@ const Transport = () => {
         <MagicBento
           enableStars enableSpotlight enableBorderGlow clickEffect
           spotlightRadius={400} particleCount={12} glowColor="184, 134, 11"
-          className="rounded-2xl"
+          className="rounded-2xl" overflowVisible
         >
           <div className="glass-card gold-border p-6 rounded-2xl">
             <div className="flex flex-col sm:flex-row items-stretch gap-4">
