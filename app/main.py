@@ -1,4 +1,5 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers.itinerary_router import router as itinerary_router
 from app.routers import place_analysis_router
@@ -11,13 +12,50 @@ from app.routers.transport_router import router as transport_router
 from app.routers.places_router import router as places_router
 from app.routers.nearby_router import router as nearby_router
 import uvicorn
+import time
+from app.core.logger import setup_logger
 
+logger = setup_logger()
 
 app = FastAPI(
     title="Trevia: Safety-First Travel AI",
     description="Backend API for generating safe travel itineraries and real-time risk analytics.",
     version="1.0.0"
 )
+
+logger.info("Trevia backend starting...")
+
+
+@app.middleware("http")
+async def log_requests(request: Request, call_next):
+    start_time = time.time()
+
+    logger.info(f"Incoming request: {request.method} {request.url}")
+
+    try:
+        response = await call_next(request)
+        duration = round((time.time() - start_time) * 1000, 2)
+
+        logger.info(
+            f"Completed {request.method} {request.url} "
+            f"Status: {response.status_code} "
+            f"Duration: {duration}ms"
+        )
+
+        return response
+
+    except Exception as e:
+        logger.exception(f"Unhandled error during request: {str(e)}")
+        raise
+
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    logger.exception(f"Unhandled exception at {request.url}")
+    return JSONResponse(
+        status_code=500,
+        content={"detail": "Internal server error"},
+    )
 
 
 app.add_middleware(

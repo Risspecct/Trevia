@@ -1,11 +1,20 @@
 import logging
+import sys
 
 
 def setup_logger():
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
-    )
+    logger = logging.getLogger("trevia")
+    logger.setLevel(logging.INFO)
 
-    logger = logging.getLogger("app_logger")
+    handler = logging.StreamHandler(sys.stdout)
+    handler.setLevel(logging.INFO)
+
+    formatter = logging.Formatter(
+        "%(asctime)s | %(levelname)s | %(name)s | %(message)s"
+    )
+    handler.setFormatter(formatter)
+
+    if not logger.handlers:
+        logger.addHandler(handler)
+
     return logger
