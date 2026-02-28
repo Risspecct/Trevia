@@ -1,3 +1,4 @@
+import json
 import os
 from dotenv import load_dotenv
 from google.cloud import texttospeech
@@ -8,17 +9,16 @@ class GoogleTextToSpeech:
     def __init__(self):
         load_dotenv()
 
-        credentials_path = os.getenv("GCP_SERVICE_ACCOUNT_JSON")
+        # credentials_path = os.getenv("GCP_SERVICE_ACCOUNT_JSON")
 
-        if not credentials_path:
-            raise ValueError("GCP_SERVICE_ACCOUNT_JSON not set in .env")
+        # if not credentials_path:
+        #     raise ValueError("GCP_SERVICE_ACCOUNT_JSON not set in .env")
 
-        if not os.path.exists(credentials_path):
-            raise FileNotFoundError(f"Credentials file not found at: {credentials_path}")
+        # if not os.path.exists(credentials_path):
+        #     raise FileNotFoundError(f"Credentials file not found at: {credentials_path}")
 
-        credentials = service_account.Credentials.from_service_account_file(
-            credentials_path
-        )
+        service_account_info = json.loads(os.getenv("GCP_SERVICE_ACCOUNT_JSON"))
+        credentials = service_account.Credentials.from_service_account_info(service_account_info)
 
         self.client = texttospeech.TextToSpeechClient(credentials=credentials)
 
