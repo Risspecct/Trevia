@@ -133,7 +133,7 @@ const ContactCard = ({ contact, index, copiedNum, onCopy }: { contact: Emergency
         <p className="text-sm font-semibold text-foreground mb-3">{contact.name}</p>
         <div className="space-y-1">
           <div className="flex items-center justify-between text-xs text-muted-foreground">
-            <span>Response Priority</span><span>{priority}%</span>
+            <span>Response Priority</span><span>{priority}</span>
           </div>
           <div className="w-full h-1.5 rounded-full bg-muted/20 overflow-hidden">
             <div className={`h-full rounded-full ${color.bar}`} style={{ width: `${priority}%` }} />

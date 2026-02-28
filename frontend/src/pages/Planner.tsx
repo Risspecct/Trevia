@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
+import axios from "axios";
 import {
   MapContainer,
   TileLayer,
   Marker,
   Popup,
+  CircleMarker,
   useMap,
 } from "react-leaflet";
 import L from "leaflet";
@@ -63,6 +65,21 @@ interface ItineraryData {
   daily_itinerary: DayPlan[];
   emergency_info: EmergencyInfo;
 }
+
+interface NearbyPlace {
+  name: string;
+  address: string;
+  gps: { lat: number; lng: number };
+  rating: number | null;
+  phone: string;
+}
+
+interface NearbyMarker {
+  type: "hospital" | "police";
+  place: NearbyPlace;
+}
+
+const API = "http://127.0.0.1:8000";
 
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
@@ -199,6 +216,57 @@ const Planner = () => {
     if (result && result.daily_itinerary.length > 0) {
       setOpenDays([1]);
     }
+  }, [result]);
+
+  // Nearby emergency services (hospitals + police stations)
+  const [nearbyMarkers, setNearbyMarkers] = useState<NearbyMarker[]>([]);
+  const [nearbyLoading, setNearbyLoading] = useState(false);
+
+  useEffect(() => {
+    if (!result) { setNearbyMarkers([]); return; }
+
+    const allActivities = result.daily_itinerary.flatMap((d) => d.activities);
+    // Deduplicate by rounding to 3 decimals (~111m precision) to avoid redundant calls
+    const seen = new Set<string>();
+    const coords: { lat: number; lng: number }[] = [];
+    for (const a of allActivities) {
+      const key = `${a.latitude.toFixed(3)},${a.longitude.toFixed(3)}`;
+      if (!seen.has(key)) { seen.add(key); coords.push({ lat: a.latitude, lng: a.longitude }); }
+    }
+
+    if (coords.length === 0) return;
+
+    let cancelled = false;
+    setNearbyLoading(true);
+
+    (async () => {
+      const markers: NearbyMarker[] = [];
+      // Fetch in parallel for all coords
+      const promises = coords.map(async (c) => {
+        try {
+          const res = await axios.post(`${API}/nearby/emergency`, { lat: c.lat, lng: c.lng });
+          const cats = res.data?.categories ?? {};
+
+          // Hospitals
+          if (cats.hospital?.places) {
+            for (const p of cats.hospital.places) {
+              markers.push({ type: "hospital", place: p });
+            }
+          }
+          // Police
+          if (cats.police?.places) {
+            for (const p of cats.police.places) {
+              markers.push({ type: "police", place: p });
+            }
+          }
+        } catch { /* skip failed coord */ }
+      });
+
+      await Promise.all(promises);
+      if (!cancelled) { setNearbyMarkers(markers); setNearbyLoading(false); }
+    })();
+
+    return () => { cancelled = true; };
   }, [result]);
 
   const toggleDay = (day: number) => {
@@ -517,9 +585,41 @@ const Planner = () => {
                         </Popup>
                       </Marker>
                     ))}
+
+                    {/* Nearby emergency markers */}
+                    {nearbyMarkers.map((m, i) => (
+                      <CircleMarker
+                        key={`em-${i}`}
+                        center={[m.place.gps.lat, m.place.gps.lng]}
+                        radius={8}
+                        pathOptions={{
+                          color: m.type === "hospital" ? "#3b82f6" : "#ef4444",
+                          fillColor: m.type === "hospital" ? "#3b82f6" : "#ef4444",
+                          fillOpacity: 0.7,
+                          weight: 2,
+                        }}
+                      >
+                        <Popup>
+                          <div style={{ maxWidth: 220 }}>
+                            <strong style={{ fontSize: 13 }}>
+                              {m.type === "hospital" ? "🏥" : "🚔"} {m.place.name}
+                            </strong>
+                            {m.place.address && (
+                              <p style={{ fontSize: 11, marginTop: 4, color: "#666" }}>{m.place.address}</p>
+                            )}
+                            {m.place.phone && (
+                              <p style={{ fontSize: 11, marginTop: 2 }}>📞 {m.place.phone}</p>
+                            )}
+                            {m.place.rating && (
+                              <p style={{ fontSize: 11, marginTop: 2 }}>⭐ {m.place.rating}</p>
+                            )}
+                          </div>
+                        </Popup>
+                      </CircleMarker>
+                    ))}
                   </MapContainer>
                 </div>
-                {/* Day color legend */}
+                {/* Legend */}
                 <div className="flex flex-wrap items-center gap-3 px-5 py-3 border-t border-border">
                   {result.daily_itinerary.map((d) => (
                     <span key={d.day} className="flex items-center gap-1.5 text-xs text-muted-foreground">
@@ -527,6 +627,24 @@ const Planner = () => {
                       Day {d.day}
                     </span>
                   ))}
+                  {nearbyMarkers.length > 0 && (
+                    <>
+                      <span className="w-px h-4 bg-border" />
+                      <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                        <span className="w-2.5 h-2.5 rounded-full bg-blue-500" />
+                        Hospital
+                      </span>
+                      <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                        <span className="w-2.5 h-2.5 rounded-full bg-red-500" />
+                        Police Station
+                      </span>
+                    </>
+                  )}
+                  {nearbyLoading && (
+                    <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                      <Loader2 className="w-3 h-3 animate-spin" /> Finding nearby emergency services…
+                    </span>
+                  )}
                 </div>
               </div>
             </MagicBento>

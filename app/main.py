@@ -7,6 +7,9 @@ from app.routers.guardian_router import router as guardian_router
 from app.routers.crime_analysis_router import router as crime_router
 from app.routers.translator_router import router as translator_router
 from app.routers.tts_router import router as tts_router
+from app.routers.transport_router import router as transport_router
+from app.routers.places_router import router as places_router
+from app.routers.nearby_router import router as nearby_router
 import uvicorn
 
 
@@ -45,6 +48,15 @@ app.include_router(translator_router)
 
 # Include the Text-to-Speech Router
 app.include_router(tts_router)
+
+# Include the Transport Router
+app.include_router(transport_router)
+
+# Include the Places Autocomplete Router
+app.include_router(places_router)
+
+# Include the Nearby Emergency Services Router
+app.include_router(nearby_router)
 
 
 @app.get("/", tags=["Health Check"])

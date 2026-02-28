@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import gsap from "gsap";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import {
   Search,
   MapPin,
@@ -21,6 +22,47 @@ import ParticleCanvas from "@/components/ParticleCanvas";
 import MagicBento from "@/components/MagicBento";
 import TreviaLogo from "@/components/TreviaLogo";
 import { ALL_STATES, getCitiesForState } from "@/data/indianStatesAndCities";
+
+const API = "http://127.0.0.1:8000";
+
+/* ─── Place Autocomplete ─── */
+
+interface PlaceSuggestion {
+  description: string;
+  place_id: string;
+  gps: { lat: number; lng: number };
+}
+
+function useAutocomplete(debounceMs = 350) {
+  const [query, setQuery] = useState("");
+  const [suggestions, setSuggestions] = useState<PlaceSuggestion[]>([]);
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handleChange = useCallback(
+    (value: string) => {
+      setQuery(value);
+      if (timerRef.current) clearTimeout(timerRef.current);
+      if (value.trim().length < 2) { setSuggestions([]); setOpen(false); return; }
+      timerRef.current = setTimeout(async () => {
+        setLoading(true);
+        try {
+          const res = await axios.get(`${API}/places/autocomplete`, { params: { input: value.trim() } });
+          const list: PlaceSuggestion[] = res.data?.suggestions ?? [];
+          setSuggestions(list);
+          setOpen(list.length > 0);
+        } catch { setSuggestions([]); setOpen(false); } finally { setLoading(false); }
+      }, debounceMs);
+    },
+    [debounceMs],
+  );
+
+  const select = useCallback((s: PlaceSuggestion) => { setQuery(s.description); setSuggestions([]); setOpen(false); }, []);
+  const close = useCallback(() => setOpen(false), []);
+
+  return { query, setQuery, suggestions, open, loading, handleChange, select, close };
+}
 
 interface SafetyDetails {
   risk_level: string;
@@ -70,7 +112,7 @@ const riskBg = (level: string) => {
 
 const PlaceAnalysis = () => {
   const navigate = useNavigate();
-  const [placeName, setPlaceName] = useState("");
+  const placeAc = useAutocomplete();
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [loading, setLoading] = useState(false);
@@ -78,6 +120,7 @@ const PlaceAnalysis = () => {
   const [error, setError] = useState<string | null>(null);
   const formRef = useRef<HTMLDivElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
+  const placeDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (formRef.current) {
@@ -87,6 +130,15 @@ const PlaceAnalysis = () => {
         { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power3.out" }
       );
     }
+  }, []);
+
+  /* Close autocomplete on outside click */
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (placeDropdownRef.current && !placeDropdownRef.current.contains(e.target as Node)) placeAc.close();
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
   }, []);
 
   useEffect(() => {
@@ -100,8 +152,9 @@ const PlaceAnalysis = () => {
   }, [result]);
 
   const handleAnalyze = async () => {
-    if (!placeName.trim() || !city.trim() || !state.trim()) return;
+    if (!placeAc.query.trim() || !city.trim() || !state.trim()) return;
 
+    placeAc.close();
     setLoading(true);
     setError(null);
     setResult(null);
@@ -111,7 +164,7 @@ const PlaceAnalysis = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          place_name: placeName.trim(),
+          place_name: placeAc.query.trim(),
           city: city.trim(),
           state: state.trim(),
         }),
@@ -178,13 +231,34 @@ const PlaceAnalysis = () => {
                 <Landmark className="w-4 h-4 text-primary" />
                 Place Name
               </label>
-              <input
-                type="text"
-                value={placeName}
-                onChange={(e) => setPlaceName(e.target.value)}
-                placeholder="e.g. Bara Imambara, Taj Mahal..."
-                className="w-full glass-card gold-border px-4 py-3 rounded-xl text-sm bg-card text-foreground outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/30 transition-all"
-              />
+              <div className="relative" ref={placeDropdownRef}>
+                <MapPin className="absolute left-3 top-3 w-4 h-4 text-primary z-10" />
+                <input
+                  type="text"
+                  value={placeAc.query}
+                  onChange={(e) => placeAc.handleChange(e.target.value)}
+                  onFocus={() => placeAc.suggestions.length > 0 && placeAc.handleChange(placeAc.query)}
+                  placeholder="e.g. Bara Imambara, Taj Mahal..."
+                  className="w-full glass-card gold-border pl-10 pr-4 py-3 rounded-xl text-sm bg-card text-foreground outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/30 transition-all"
+                />
+                {placeAc.open && (
+                  <ul className="absolute left-0 right-0 top-full mt-1 z-50 glass-card gold-border rounded-xl overflow-hidden shadow-lg max-h-56 overflow-y-auto">
+                    {placeAc.suggestions.map((s) => (
+                      <li
+                        key={s.place_id}
+                        onMouseDown={() => placeAc.select(s)}
+                        className="px-4 py-2.5 text-sm text-foreground hover:bg-primary/10 cursor-pointer flex items-start gap-2 border-b border-border/30 last:border-0 transition-colors"
+                      >
+                        <MapPin className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />
+                        <span className="leading-snug">{s.description}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {placeAc.loading && (
+                  <Loader2 className="absolute right-3 top-3 w-4 h-4 animate-spin text-muted-foreground" />
+                )}
+              </div>
             </div>
 
             {/* City & State */}
@@ -230,7 +304,7 @@ const PlaceAnalysis = () => {
             <div className="flex justify-center pt-2">
               <button
                 onClick={handleAnalyze}
-                disabled={loading || !placeName.trim() || !city.trim() || !state.trim()}
+                disabled={loading || !placeAc.query.trim() || !city.trim() || !state.trim()}
                 className="group flex items-center gap-3 px-10 py-4 rounded-xl bg-primary text-primary-foreground font-semibold text-sm tracking-wide hover-lift gold-glow transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? (
