@@ -107,7 +107,7 @@ npm install
 npm run dev
 ```
 
-The frontend will be available at `http://localhost:8080` (or as specified by Vite), and the API documentation (Swagger) will be accessible at `http://localhost:8000/docs`.
+The frontend will be available at `https://trevia-zeta.vercel.app/` (or as specified by Vite), and the API documentation (Swagger) will be accessible at `https://trevia-hrnw.onrender.com/`.
 
 ---
 
