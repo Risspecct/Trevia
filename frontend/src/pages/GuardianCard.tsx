@@ -13,29 +13,14 @@ import {
   VolumeX,
   Loader2,
   Printer,
+  Languages,
+  Send,
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import ParticleCanvas from "@/components/ParticleCanvas";
 import MagicBento from "@/components/MagicBento";
 import TreviaLogo from "@/components/TreviaLogo";
-
-const STATES = [
-  "Goa",
-  "Uttar Pradesh",
-  "Maharashtra",
-  "Bihar",
-  "West Bengal",
-  "Madhya Pradesh",
-  "Tamil Nadu",
-  "Rajasthan",
-  "Karnataka",
-  "Gujarat",
-  "Kerala",
-  "Punjab",
-  "Haryana",
-  "Delhi",
-  "Telangana",
-];
+import { ALL_STATES } from "@/data/indianStatesAndCities";
 
 interface EmergencyContact { name: string; number: string; }
 interface Phrase { english: string; local: string; pronunciation: string; }
@@ -191,19 +176,13 @@ const GuardianCard = () => {
   const [error, setError] = useState<string | null>(null);
   const [copiedNum, setCopiedNum] = useState<string | null>(null);
   const [speakingIdx, setSpeakingIdx] = useState<number | null>(null);
+  const [ttsLoading, setTtsLoading] = useState<number | null>(null);
+  const [translateInput, setTranslateInput] = useState("");
+  const [translatedText, setTranslatedText] = useState<string | null>(null);
+  const [translateLoading, setTranslateLoading] = useState(false);
   const printRef = useRef<HTMLDivElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
-  const voicesRef = useRef<SpeechSynthesisVoice[]>([]);
-
-  // Preload speech synthesis voices (required by some browsers)
-  useEffect(() => {
-    const loadVoices = () => {
-      voicesRef.current = window.speechSynthesis.getVoices();
-    };
-    loadVoices();
-    window.speechSynthesis.onvoiceschanged = loadVoices;
-    return () => { window.speechSynthesis.onvoiceschanged = null; };
-  }, []);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => { if (prefilledState) fetchGuardian(prefilledState); }, []);
 
@@ -227,41 +206,70 @@ const GuardianCard = () => {
 
   const copyNumber = (num: string) => { navigator.clipboard.writeText(num); setCopiedNum(num); setTimeout(() => setCopiedNum(null), 1500); };
 
-  const speak = useCallback((text: string, idx: number, lang?: string) => {
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
+  /** Play TTS via backend Google Cloud TTS endpoint */
+  const speak = useCallback(async (text: string, idx: number, lang?: string) => {
+    // Stop any currently playing audio
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+    }
+    setSpeakingIdx(null);
+    setTtsLoading(idx);
 
-    const voices = voicesRef.current.length ? voicesRef.current : window.speechSynthesis.getVoices();
-    const preferred = lang || "hi-IN";
+    try {
+      const res = await fetch("http://127.0.0.1:8000/tts/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text, language_code: lang || "hi-IN" }),
+      });
 
-    // Hindi voice priority: exact hi-IN → any hi variant → Google हिन्दी → en-IN → any en
-    const match =
-      voices.find((v) => v.lang === "hi-IN" && v.name.toLowerCase().includes("google")) ||
-      voices.find((v) => v.lang === "hi-IN") ||
-      voices.find((v) => v.lang.startsWith("hi")) ||
-      voices.find((v) => v.name.toLowerCase().includes("hindi")) ||
-      voices.find((v) => v.lang === preferred) ||
-      voices.find((v) => v.lang === "en-IN") ||
-      voices.find((v) => v.lang.startsWith("en"));
+      if (!res.ok) throw new Error("TTS generation failed");
 
-    if (match) u.voice = match;
-    u.lang = preferred;
-    // Slower rate for clearer Hindi pronunciation
-    u.rate = 0.75;
-    u.pitch = 1.0;
-    u.volume = 1;
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const audio = new Audio(url);
+      audioRef.current = audio;
 
-    u.onstart = () => setSpeakingIdx(idx);
-    u.onend = () => setSpeakingIdx(null);
-    u.onerror = () => setSpeakingIdx(null);
+      audio.onplay = () => { setTtsLoading(null); setSpeakingIdx(idx); };
+      audio.onended = () => { setSpeakingIdx(null); audioRef.current = null; URL.revokeObjectURL(url); };
+      audio.onerror = () => { setTtsLoading(null); setSpeakingIdx(null); audioRef.current = null; URL.revokeObjectURL(url); };
 
-    window.speechSynthesis.speak(u);
+      await audio.play();
+    } catch {
+      setTtsLoading(null);
+      setSpeakingIdx(null);
+    }
   }, []);
 
   const stopSpeaking = useCallback(() => {
-    window.speechSynthesis.cancel();
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+    }
     setSpeakingIdx(null);
+    setTtsLoading(null);
   }, []);
+
+  /** Translate English text to Hindi via backend */
+  const handleTranslate = useCallback(async () => {
+    if (!translateInput.trim()) return;
+    setTranslateLoading(true);
+    setTranslatedText(null);
+    try {
+      const res = await fetch("http://127.0.0.1:8000/translate/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: translateInput.trim(), target_language: "hi" }),
+      });
+      if (!res.ok) throw new Error("Translation failed");
+      const json = await res.json();
+      setTranslatedText(json.translated_text);
+    } catch {
+      setTranslatedText("⚠ Translation failed. Please try again.");
+    } finally {
+      setTranslateLoading(false);
+    }
+  }, [translateInput]);
 
   const handlePrint = () => {
     if (!printRef.current) return;
@@ -294,7 +302,7 @@ const GuardianCard = () => {
               <div className="relative">
                 <select value={selectedState} onChange={(e) => setSelectedState(e.target.value)} className="w-full glass-card gold-border px-4 py-3 rounded-xl text-sm bg-card text-foreground outline-none appearance-none cursor-pointer focus:ring-2 focus:ring-primary/30 transition-all">
                   <option value="">Choose a state...</option>
-                  {STATES.map((s) => (<option key={s} value={s}>{s}</option>))}
+                  {ALL_STATES.map((s) => (<option key={s} value={s}>{s}</option>))}
                 </select>
                 <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
               </div>
@@ -370,10 +378,11 @@ const GuardianCard = () => {
                   </button>
                 )}
               </div>
-              <p className="text-xs text-muted-foreground -mt-2">Essential local phrases — click the speaker to hear Hindi pronunciation.</p>
+              <p className="text-xs text-muted-foreground -mt-2">Essential local phrases — click the speaker to hear pronunciation via Google TTS.</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {data.phrases.map((p, i) => {
                   const isSpeaking = speakingIdx === i;
+                  const isLoading = ttsLoading === i;
                   return (
                     <div key={i} className={`glass-card gold-border rounded-xl p-4 flex items-center justify-between gap-3 group transition-all duration-300 ${isSpeaking ? "ring-2 ring-blue-400/50 border-blue-400/30" : ""}`}>
                       <div className="min-w-0">
@@ -383,16 +392,66 @@ const GuardianCard = () => {
                       </div>
                       <button
                         onClick={() => isSpeaking ? stopSpeaking() : speak(p.local, i)}
-                        className={`p-2.5 rounded-xl transition-all duration-300 shrink-0 ${isSpeaking ? "bg-blue-500/20 text-blue-400 scale-110" : "hover:bg-primary/10"}`}
+                        disabled={isLoading}
+                        className={`p-2.5 rounded-xl transition-all duration-300 shrink-0 ${isSpeaking ? "bg-blue-500/20 text-blue-400 scale-110" : "hover:bg-primary/10"} disabled:opacity-50`}
                         title={isSpeaking ? "Stop" : "Speak"}
                       >
-                        {isSpeaking
-                          ? <VolumeX className="w-4 h-4 text-blue-400 animate-pulse" />
-                          : <Volume2 className="w-4 h-4 text-muted-foreground group-hover:text-primary" />}
+                        {isLoading
+                          ? <Loader2 className="w-4 h-4 text-blue-400 animate-spin" />
+                          : isSpeaking
+                            ? <VolumeX className="w-4 h-4 text-blue-400 animate-pulse" />
+                            : <Volume2 className="w-4 h-4 text-muted-foreground group-hover:text-primary" />}
                       </button>
                     </div>
                   );
                 })}
+              </div>
+
+              {/* Custom Translator */}
+              <div className="border-t border-border pt-4 mt-2 space-y-3">
+                <h5 className="flex items-center gap-2 text-sm font-semibold text-foreground">
+                  <Languages className="w-4 h-4 text-primary" /> Custom Translator
+                </h5>
+                <p className="text-xs text-muted-foreground">Type any English phrase to translate it to Hindi.</p>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={translateInput}
+                    onChange={(e) => setTranslateInput(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && handleTranslate()}
+                    placeholder="e.g. Where is the nearest hospital?"
+                    className="flex-1 glass-card gold-border px-4 py-2.5 rounded-xl text-sm bg-card text-foreground outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/30 transition-all"
+                  />
+                  <button
+                    onClick={handleTranslate}
+                    disabled={translateLoading || !translateInput.trim()}
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-semibold hover-lift transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {translateLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                  </button>
+                </div>
+                {translatedText && (
+                  <div className="glass-card gold-border rounded-xl p-4 flex items-center justify-between gap-3">
+                    <div className="min-w-0">
+                      <span className="text-xs text-muted-foreground block">Hindi Translation</span>
+                      <span className="text-sm font-semibold text-primary block">{translatedText}</span>
+                    </div>
+                    {!translatedText.startsWith("\u26a0") && (
+                      <button
+                        onClick={() => speak(translatedText, -1)}
+                        disabled={ttsLoading === -1}
+                        className={`p-2.5 rounded-xl transition-all duration-300 shrink-0 hover:bg-primary/10 ${speakingIdx === -1 ? "bg-blue-500/20 scale-110" : ""} disabled:opacity-50`}
+                        title="Speak translation"
+                      >
+                        {ttsLoading === -1
+                          ? <Loader2 className="w-4 h-4 text-blue-400 animate-spin" />
+                          : speakingIdx === -1
+                            ? <VolumeX className="w-4 h-4 text-blue-400 animate-pulse" />
+                            : <Volume2 className="w-4 h-4 text-muted-foreground hover:text-primary" />}
+                      </button>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </MagicBento>

@@ -30,6 +30,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 import ParticleCanvas from "@/components/ParticleCanvas";
 import MagicBento from "@/components/MagicBento";
 import TreviaLogo from "@/components/TreviaLogo";
+import { ALL_STATES, getCitiesForState } from "@/data/indianStatesAndCities";
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -302,17 +303,29 @@ const Planner = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
-                  <Building2 className="w-4 h-4 text-primary" /> City
+                  <MapPin className="w-4 h-4 text-primary" /> State
                 </label>
-                <input type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="e.g. Varanasi"
-                  className="w-full glass-card gold-border px-4 py-3 rounded-xl text-sm bg-card text-foreground outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/30 transition-all" />
+                <div className="relative">
+                  <select value={state} onChange={(e) => { setState(e.target.value); setCity(""); }}
+                    className="w-full glass-card gold-border px-4 py-3 rounded-xl text-sm bg-card text-foreground outline-none appearance-none cursor-pointer focus:ring-2 focus:ring-primary/30 transition-all">
+                    <option value="">Choose a state...</option>
+                    {ALL_STATES.map((s) => (<option key={s} value={s}>{s}</option>))}
+                  </select>
+                  <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
+                </div>
               </div>
               <div className="space-y-2">
                 <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
-                  <MapPin className="w-4 h-4 text-primary" /> State
+                  <Building2 className="w-4 h-4 text-primary" /> City
                 </label>
-                <input type="text" value={state} onChange={(e) => setState(e.target.value)} placeholder="e.g. Uttar Pradesh"
-                  className="w-full glass-card gold-border px-4 py-3 rounded-xl text-sm bg-card text-foreground outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/30 transition-all" />
+                <div className="relative">
+                  <select value={city} onChange={(e) => setCity(e.target.value)} disabled={!state}
+                    className="w-full glass-card gold-border px-4 py-3 rounded-xl text-sm bg-card text-foreground outline-none appearance-none cursor-pointer focus:ring-2 focus:ring-primary/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+                    <option value="">{state ? "Choose a city..." : "Select state first"}</option>
+                    {getCitiesForState(state).map((c) => (<option key={c} value={c}>{c}</option>))}
+                  </select>
+                  <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
+                </div>
               </div>
             </div>
           </div>
