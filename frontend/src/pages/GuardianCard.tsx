@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import gsap from "gsap";
 import {
@@ -10,6 +10,7 @@ import {
   CircleCheck,
   CircleX,
   Volume2,
+  VolumeX,
   Loader2,
   Printer,
 } from "lucide-react";
@@ -189,12 +190,16 @@ const GuardianCard = () => {
   const [data, setData] = useState<GuardianData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [copiedNum, setCopiedNum] = useState<string | null>(null);
+  const [speakingIdx, setSpeakingIdx] = useState<number | null>(null);
   const printRef = useRef<HTMLDivElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
+  const voicesRef = useRef<SpeechSynthesisVoice[]>([]);
 
   // Preload speech synthesis voices (required by some browsers)
   useEffect(() => {
-    const loadVoices = () => window.speechSynthesis.getVoices();
+    const loadVoices = () => {
+      voicesRef.current = window.speechSynthesis.getVoices();
+    };
     loadVoices();
     window.speechSynthesis.onvoiceschanged = loadVoices;
     return () => { window.speechSynthesis.onvoiceschanged = null; };
@@ -222,22 +227,41 @@ const GuardianCard = () => {
 
   const copyNumber = (num: string) => { navigator.clipboard.writeText(num); setCopiedNum(num); setTimeout(() => setCopiedNum(null), 1500); };
 
-  const speak = (text: string, lang?: string) => {
+  const speak = useCallback((text: string, idx: number, lang?: string) => {
     window.speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
-    u.rate = 0.8;
-    u.pitch = 1.05;
-    // Try to pick a voice matching the region / Hindi / English-IN
-    const voices = window.speechSynthesis.getVoices();
+
+    const voices = voicesRef.current.length ? voicesRef.current : window.speechSynthesis.getVoices();
     const preferred = lang || "hi-IN";
-    const match = voices.find((v) => v.lang === preferred) ||
-                  voices.find((v) => v.lang.startsWith(preferred.split("-")[0])) ||
-                  voices.find((v) => v.lang === "en-IN") ||
-                  voices.find((v) => v.lang.startsWith("en"));
+
+    // Hindi voice priority: exact hi-IN → any hi variant → Google हिन्दी → en-IN → any en
+    const match =
+      voices.find((v) => v.lang === "hi-IN" && v.name.toLowerCase().includes("google")) ||
+      voices.find((v) => v.lang === "hi-IN") ||
+      voices.find((v) => v.lang.startsWith("hi")) ||
+      voices.find((v) => v.name.toLowerCase().includes("hindi")) ||
+      voices.find((v) => v.lang === preferred) ||
+      voices.find((v) => v.lang === "en-IN") ||
+      voices.find((v) => v.lang.startsWith("en"));
+
     if (match) u.voice = match;
     u.lang = preferred;
+    // Slower rate for clearer Hindi pronunciation
+    u.rate = 0.75;
+    u.pitch = 1.0;
+    u.volume = 1;
+
+    u.onstart = () => setSpeakingIdx(idx);
+    u.onend = () => setSpeakingIdx(null);
+    u.onerror = () => setSpeakingIdx(null);
+
     window.speechSynthesis.speak(u);
-  };
+  }, []);
+
+  const stopSpeaking = useCallback(() => {
+    window.speechSynthesis.cancel();
+    setSpeakingIdx(null);
+  }, []);
 
   const handlePrint = () => {
     if (!printRef.current) return;
@@ -338,21 +362,37 @@ const GuardianCard = () => {
 
           <MagicBento textAutoHide enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={500} particleCount={10} glowColor="96, 165, 250" className="gc-section rounded-2xl">
             <div className="glass-card gold-border p-6 rounded-2xl space-y-4">
-              <h4 className="flex items-center gap-2 text-lg font-display font-bold text-foreground"><Volume2 className="w-5 h-5 text-blue-400" /> Phrase Translator</h4>
-              <p className="text-xs text-muted-foreground -mt-2">Essential local phrases  click the speaker to hear pronunciation.</p>
+              <div className="flex items-center justify-between">
+                <h4 className="flex items-center gap-2 text-lg font-display font-bold text-foreground"><Volume2 className="w-5 h-5 text-blue-400" /> Phrase Translator</h4>
+                {speakingIdx !== null && (
+                  <button onClick={stopSpeaking} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-semibold hover:bg-red-500/20 transition-colors">
+                    <VolumeX className="w-3.5 h-3.5" /> Stop
+                  </button>
+                )}
+              </div>
+              <p className="text-xs text-muted-foreground -mt-2">Essential local phrases — click the speaker to hear Hindi pronunciation.</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {data.phrases.map((p, i) => (
-                  <div key={i} className="glass-card gold-border rounded-xl p-4 flex items-center justify-between gap-3 group">
-                    <div className="min-w-0">
-                      <span className="text-sm font-semibold text-foreground block truncate">{p.english}</span>
-                      <span className="text-sm text-primary block truncate">{p.local}</span>
-                      {p.pronunciation && <span className="text-xs text-muted-foreground italic block truncate">({p.pronunciation})</span>}
+                {data.phrases.map((p, i) => {
+                  const isSpeaking = speakingIdx === i;
+                  return (
+                    <div key={i} className={`glass-card gold-border rounded-xl p-4 flex items-center justify-between gap-3 group transition-all duration-300 ${isSpeaking ? "ring-2 ring-blue-400/50 border-blue-400/30" : ""}`}>
+                      <div className="min-w-0">
+                        <span className="text-sm font-semibold text-foreground block truncate">{p.english}</span>
+                        <span className={`text-sm block truncate transition-colors ${isSpeaking ? "text-blue-400" : "text-primary"}`}>{p.local}</span>
+                        {p.pronunciation && <span className="text-xs text-muted-foreground italic block truncate">({p.pronunciation})</span>}
+                      </div>
+                      <button
+                        onClick={() => isSpeaking ? stopSpeaking() : speak(p.local, i)}
+                        className={`p-2.5 rounded-xl transition-all duration-300 shrink-0 ${isSpeaking ? "bg-blue-500/20 text-blue-400 scale-110" : "hover:bg-primary/10"}`}
+                        title={isSpeaking ? "Stop" : "Speak"}
+                      >
+                        {isSpeaking
+                          ? <VolumeX className="w-4 h-4 text-blue-400 animate-pulse" />
+                          : <Volume2 className="w-4 h-4 text-muted-foreground group-hover:text-primary" />}
+                      </button>
                     </div>
-                    <button onClick={() => speak(p.local)} className="p-2 rounded-lg hover:bg-primary/10 transition-colors shrink-0" title="Speak">
-                      <Volume2 className="w-4 h-4 text-muted-foreground group-hover:text-primary" />
-                    </button>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </MagicBento>

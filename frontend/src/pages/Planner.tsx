@@ -3,10 +3,11 @@ import gsap from "gsap";
 import {
   MapContainer,
   TileLayer,
-  CircleMarker,
+  Marker,
   Popup,
   useMap,
 } from "react-leaflet";
+import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import {
   Search,
@@ -23,8 +24,6 @@ import {
   Hospital,
   ChevronDown,
   ChevronUp,
-  Maximize2,
-  Minimize2,
   IndianRupee,
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -119,6 +118,20 @@ function FitBounds({ positions }: { positions: [number, number][] }) {
   return null;
 }
 
+/** Create a colored SVG marker icon for Leaflet */
+function coloredIcon(color: string) {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="42" viewBox="0 0 28 42">
+    <path d="M14 0C6.268 0 0 6.268 0 14c0 10.5 14 28 14 28s14-17.5 14-28C28 6.268 21.732 0 14 0z" fill="${color}" stroke="#fff" stroke-width="1.5"/>
+    <circle cx="14" cy="14" r="6" fill="#fff" opacity="0.9"/>
+  </svg>`;
+  return L.icon({
+    iconUrl: `data:image/svg+xml;base64,${btoa(svg)}`,
+    iconSize: [28, 42],
+    iconAnchor: [14, 42],
+    popupAnchor: [0, -42],
+  });
+}
+
 /* ------------------------------------------------------------------ */
 /*  Main Component                                                     */
 /* ------------------------------------------------------------------ */
@@ -141,7 +154,7 @@ const Planner = () => {
 
   // UI state
   const [openDays, setOpenDays] = useState<number[]>([]);
-  const [mapExpanded, setMapExpanded] = useState(false);
+  const [filterDay, setFilterDay] = useState<number | null>(null);
 
   const formRef = useRef<HTMLDivElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
@@ -431,13 +444,27 @@ const Planner = () => {
                   <h4 className="text-sm font-semibold text-foreground flex items-center gap-2">
                     <MapPin className="w-4 h-4 text-primary" /> Activity Map
                   </h4>
-                  <button onClick={() => setMapExpanded((p) => !p)}
-                    className="flex items-center gap-1 text-xs text-primary hover:underline transition-all">
-                    {mapExpanded ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
-                    {mapExpanded ? "Collapse" : "Expand"}
-                  </button>
                 </div>
-                <div style={{ height: mapExpanded ? "520px" : "280px", transition: "height 0.4s ease" }}>
+                {/* Day filter buttons */}
+                <div className="flex flex-wrap items-center gap-2 px-5 py-3 border-b border-border">
+                  <button
+                    onClick={() => setFilterDay(null)}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 ${filterDay === null ? "bg-primary text-primary-foreground" : "glass-card gold-border text-muted-foreground hover:text-foreground"}`}
+                  >
+                    All Days
+                  </button>
+                  {result.daily_itinerary.map((d) => (
+                    <button
+                      key={d.day}
+                      onClick={() => setFilterDay(d.day)}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 flex items-center gap-1.5 ${filterDay === d.day ? "bg-primary text-primary-foreground" : "glass-card gold-border text-muted-foreground hover:text-foreground"}`}
+                    >
+                      <span className="w-2 h-2 rounded-full" style={{ background: dayColors[(d.day - 1) % dayColors.length] }} />
+                      Day {d.day}
+                    </button>
+                  ))}
+                </div>
+                <div style={{ height: "480px" }}>
                   <MapContainer
                     center={allPositions.length ? allPositions[0].pos : [22.5, 78.9]}
                     zoom={12}
@@ -449,18 +476,12 @@ const Planner = () => {
                       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
                       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    <FitBounds positions={allPositions.map((p) => p.pos)} />
-                    {allPositions.map((item, i) => (
-                      <CircleMarker
+                    <FitBounds positions={(filterDay ? allPositions.filter((p) => p.day === filterDay) : allPositions).map((p) => p.pos)} />
+                    {(filterDay ? allPositions.filter((p) => p.day === filterDay) : allPositions).map((item, i) => (
+                      <Marker
                         key={i}
-                        center={item.pos}
-                        radius={10}
-                        pathOptions={{
-                          color: dayColors[(item.day - 1) % dayColors.length],
-                          fillColor: dayColors[(item.day - 1) % dayColors.length],
-                          fillOpacity: 0.7,
-                          weight: 2,
-                        }}
+                        position={item.pos}
+                        icon={coloredIcon(dayColors[(item.day - 1) % dayColors.length])}
                       >
                         <Popup>
                           <div style={{ maxWidth: 240 }}>
@@ -481,7 +502,7 @@ const Planner = () => {
                             </p>
                           </div>
                         </Popup>
-                      </CircleMarker>
+                      </Marker>
                     ))}
                   </MapContainer>
                 </div>

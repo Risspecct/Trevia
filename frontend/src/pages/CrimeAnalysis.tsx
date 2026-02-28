@@ -71,8 +71,8 @@ const riskColor = (risk: string) => {
   }
 };
 
-// ── Custom dark tile layer ──────────────────────────────────
-const DARK_TILE = "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
+// ── Custom tile layer ──────────────────────────────────
+const MAP_TILE = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png";
 
 // ── Chart custom tooltip ────────────────────────────────────
 const CustomBarTooltip = ({ active, payload, label }: any) => {
@@ -547,7 +547,7 @@ const CrimeAnalysis = () => {
                   >
                     <TileLayer
                       attribution='&copy; <a href="https://carto.com/">CARTO</a>'
-                      url={DARK_TILE}
+                      url={MAP_TILE}
                     />
 
                     {/* Hotspot markers */}

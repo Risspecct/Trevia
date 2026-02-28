@@ -2,7 +2,7 @@ import { useState } from "react";
 import {
   ArrowRight, Train, Car, Bus, Bike, Navigation,
   Shield, AlertTriangle, MapPin, Zap, Clock, IndianRupee,
-  Users, Star, CloudRain, Download, Share2, Leaf, Heart
+  Users, Star, CloudRain
 } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, CartesianGrid, Legend } from "recharts";
 import { locations } from "@/data/mockData";
@@ -112,14 +112,6 @@ const safetyAlerts = [
   { icon: "🏥", label: "Nearest hospital: 4 km (Agra Medical College)", severity: "Info" },
   { icon: "🌧️", label: "Light fog expected after 8 PM", severity: "Low" },
   { icon: "🛣️", label: "Road quality: Good (Yamuna Expressway)", severity: "Good" },
-];
-
-const premiumFeatures = [
-  { icon: <Download className="w-4 h-4" />, label: "Offline Route Save" },
-  { icon: <Share2 className="w-4 h-4" />, label: "Share Trip Plan PDF" },
-  { icon: <Leaf className="w-4 h-4" />, label: "Carbon Footprint: 12.4 kg CO₂" },
-  { icon: <Heart className="w-4 h-4" />, label: "Safe for Solo Female ✓" },
-  { icon: <Users className="w-4 h-4" />, label: "Crowd Prediction Heatmap" },
 ];
 
 /* ─── Component ─── */
@@ -363,46 +355,6 @@ const Transport = () => {
             </div>
           </div>
         </MagicBento>
-
-        {/* ── 7. AI Suggestion Banner ── */}
-        <MagicBento enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={500} particleCount={14} glowColor="184, 134, 11" className="rounded-2xl">
-          <div className="p-6 rounded-2xl border border-primary/30" style={{ background: "linear-gradient(135deg, hsl(var(--primary) / 0.08), hsl(var(--accent) / 0.05))" }}>
-            <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-xl bg-primary/15 flex items-center justify-center shrink-0">
-                <Zap className="w-5 h-5 text-primary" />
-              </div>
-              <div>
-                <h3 className="font-bold text-foreground mb-1">Smart Recommendation</h3>
-                <p className="text-sm text-foreground/80">
-                  <strong className="text-primary">Metro + Train</strong> is the optimal choice — best balance of cost (₹350), time (~4.5h), and safety rating (9.0/10).
-                </p>
-                <div className="flex flex-wrap gap-2 mt-3">
-                  <span className="text-[10px] px-2 py-1 rounded-full bg-destructive/10 text-destructive font-semibold">
-                    ⚡ Cab surge pricing 1.8× active
-                  </span>
-                  <span className="text-[10px] px-2 py-1 rounded-full bg-accent/10 text-accent font-semibold">
-                    🌫️ Bus delay due to fog
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </MagicBento>
-
-        {/* ── 8. Premium Features ── */}
-        <div>
-          <h2 className="text-sm font-semibold tracking-wider uppercase text-muted-foreground mb-4">Premium Features</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-            {premiumFeatures.map((f, i) => (
-              <MagicBento key={i} enableStars enableSpotlight enableBorderGlow clickEffect spotlightRadius={200} particleCount={4} glowColor="184, 134, 11" className="rounded-xl">
-                <div className="glass-card gold-border p-4 rounded-xl text-center hover-lift h-full flex flex-col items-center justify-center gap-2">
-                  <div className="text-primary">{f.icon}</div>
-                  <p className="text-xs font-medium text-foreground">{f.label}</p>
-                </div>
-              </MagicBento>
-            ))}
-          </div>
-        </div>
 
       </div>
     </div>
