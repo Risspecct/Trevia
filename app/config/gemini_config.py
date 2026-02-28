@@ -6,7 +6,7 @@ load_dotenv()
 
 # 1. Configuration Constants
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-MODEL_NAME = "gemini-2.0-flash"              # 'flash' is faster for hackathons
+MODEL_NAME = "gemini-2.5-flash"              # 'flash' is faster for hackathons
 
 # 2. API Setup
 genai.configure(api_key=GEMINI_API_KEY)
